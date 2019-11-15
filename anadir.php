@@ -5,4 +5,5 @@ if (true) {
 
 }else
     print "<p>adios</p>";
+print "<p>adios</p>";
 
