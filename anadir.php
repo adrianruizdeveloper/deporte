@@ -4,10 +4,7 @@ if (true) {
     print "<p>adios</p>";
 
 }else
-    print "<p>adios</p>";
-print "<p>adios</p>";
-print "<p>adios</p>";
-print "<p>adios</p>";
-print "<p>nuevo</p>";
+    print "<p>adioswfa3rqr</p>";
+
 
 
