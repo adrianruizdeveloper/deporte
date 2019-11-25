@@ -7,8 +7,8 @@
                 </div>
                 <div class="col-md-4">
                     <ul id="botones_login">
-                        <li>Login</li>
-                        <li>Register</li>
+                        <li><a href="login.php">Login</a></li>
+                        <li><a href="registro.php">Register</li>
                     </ul>
                 </div>
             </div>
@@ -19,11 +19,11 @@
                 <li class="nav-item"><a class="nav-link" href="#">BALONMANO</a></li>
             </ul>
             <ul class="nav nav-tabs" id="menu2">
-                <li class="nav-item"><a class="nav-link" href="#">Equipos</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Calendario</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Estadística</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Clasificación</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Jugadores</a></li>
+                <li class="nav-item"><a class="nav-link" href="equipos.php">Equipos</a></li>
+                <li class="nav-item"><a class="nav-link" href="calendario.php">Calendario</a></li>
+                <li class="nav-item"><a class="nav-link" href="estadisticas.php">Estadística</a></li>
+                <li class="nav-item"><a class="nav-link" href="clasificacion.php">Clasificación</a></li>
+                <li class="nav-item"><a class="nav-link" href="jugadores.php">Jugadores</a></li>
             </ul>
         </div>
     </div>
