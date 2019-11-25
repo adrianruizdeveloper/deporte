@@ -20,7 +20,7 @@
 
 <body>
     <?php include 'cabecera.php'; ?>
-
+    <?php include 'conexionusuarios.php'; ?>
     <form><input class="form-control" type="email" placeholder="Email" style="text-align: center;"><input class="form-control" type="password" placeholder="Costraseña" style="text-align: center;">
         <p style="text-align: center;">"captcha"</p>
         <p style="text-align: center;"><button class="btn btn-primary" type="submit">Enviar</button></p>

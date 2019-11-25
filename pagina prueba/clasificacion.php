@@ -21,6 +21,7 @@
 
 <body>
             <?php include 'cabecera.php'; ?>
+    <?php include 'conexionproyecto.php'; ?>
 
     <div class="table-responsive">
         <table class="table">

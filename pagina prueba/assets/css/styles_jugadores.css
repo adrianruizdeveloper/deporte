@@ -1,0 +1,16 @@
+li {
+  list-style: none;
+}
+
+dl, ol, ul {
+  padding: 0px;
+}
+
+td, th {
+  width: 100px;
+  height: 1px;
+  padding: 0px;
+  margin: 0px;
+  text-align: center;
+}
+

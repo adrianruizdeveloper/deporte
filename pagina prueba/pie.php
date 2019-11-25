@@ -18,8 +18,8 @@
                             <li></li>
                             <li></li>
                         </ul>
-                        <p>AM System</p>
-                        <p>I.E.S Sierra las Villas</p>
+                        <p><a href="https://amsystem.es/">AM System</a></p>
+                        <p><a href="https://www.iesvirgendelcarmen.com/ies/index.php">I.E.S Sierra las Villas</a></p>
                     </div>
                     <div class="col-sm-6 col-md-3 item">
                         <h3>Privacidad</h3>

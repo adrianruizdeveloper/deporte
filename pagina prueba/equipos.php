@@ -20,6 +20,7 @@
 
 <body>
         <?php include 'cabecera.php'; ?>
+    <?php include 'conexionproyecto.php'; ?>
 
     <div>
         <div class="container">
