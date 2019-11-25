@@ -1,18 +1,30 @@
-<header>
-    <div id="cabecera_principal" class="cabecera_principal"><img>
-        <h1 class="titulo">Proyecto</h1>
-        <div class="login">
-            <nav class="navbar navbar-light navbar-expand-md">
-                <div class="container-fluid"><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse" id="navcol-1">
-                        <ul class="nav navbar-nav">
-                            <li class="nav-item" role="presentation"><a class="nav-link active" href="#">Login</a></li>
-                            <li class="nav-item" role="presentation"><a class="nav-link active" href="#">Register</a></li>
-                        </ul>
-                    </div>
+
+    <div>
+        <div>
+            <div class="row">
+                <div class="col-md-8"><img src="assets/img/descarga.png">
+                    <p id="titulo_pagina">Proyecto</p>
                 </div>
-            </nav>
+                <div class="col-md-4">
+                    <ul id="botones_login">
+                        <li>Login</li>
+                        <li>Register</li>
+                    </ul>
+                </div>
+            </div>
+            <ul class="nav nav-tabs" id="menu1">
+                <li class="nav-item"><a class="nav-link" href="#">FÚTBOL</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">FUTBOL SALA</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">BALONCESTO</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">BALONMANO</a></li>
+            </ul>
+            <ul class="nav nav-tabs" id="menu2">
+                <li class="nav-item"><a class="nav-link" href="#">Equipos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Calendario</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Estadística</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Clasificación</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Jugadores</a></li>
+            </ul>
         </div>
-    
     </div>
-</header>
+  
