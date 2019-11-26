@@ -35,7 +35,7 @@ foreach ($db->query($consulta_equipos) as $fila) {
     $nombre_eq = $fila['nombre_eq'];
     $lista .= "<li value=\"" . $idequipo . "\">" . $nombre_eq . "</li>";
 }
-//_-----------------------------------------------------------------------
+//_-----------------------------------------------------------------------_\\
 $jugadores = "";
 $consulta_jugadores = "SELECT idjugador, alias_jug from jugador";
 foreach ($db->query($consulta_jugadores) as $fila) {
@@ -43,21 +43,27 @@ foreach ($db->query($consulta_jugadores) as $fila) {
     $alias_jug = $fila['alias_jug'];
     $jugadores .= "<option value=\"" . $idjugador . "\">" . $alias_jug . "</option>";
 }
-//_----------------------------------------------------------
+//_----------------------------------------------------------_\\
 $info_jug = "";
-$consulta_infojug = "SELECT * from jugador where idjugador=1";
+$consulta_infojug = "SELECT * from jugador where idjugador=2";
 foreach ($db->query($consulta_infojug) as $fila) {
     $idposicion_jug = $fila['idposicion_jug'];
     $idjugador = $fila['idjugador'];
     $nombre_jug = $fila['nombre_jug'];
     $apellido_jug = $fila['apellido_jug'];
     $alias_jug = $fila['alias_jug'];
-    $fecha_nac_jug = $fila['fecha_nac_jug'];
+    $fechanac_jug = $fila['fechanac_jug'];
     $nacionalidad_jug = $fila['nacionalidad_jug'];
     $numero_jug = $fila['numero_jug'];
     $equipos_jug = $fila['equipos_jug'];
 }
-
+//_-------------------------------------------------------------_\\
+$equipo="";
+$consulta_equipo_jug = "SELECT idequipo, nombre_eq, liga_eq from equipo where idequipo=".$equipos_jug.";";
+foreach ($db->query($consulta_equipo_jug) as $fila) {
+    $equipos_jug=$fila['nombre_eq'];
+    $liga_jug=$fila['liga_eq'];
+}
 ?>
 
 <div>
@@ -77,9 +83,9 @@ foreach ($db->query($consulta_infojug) as $fila) {
                 </select>
                 <div class="table-responsive">
                     <table class="table">
-                        <img src="#">
-                        <p>a</p>
-                        <p>a</p>
+                        <img src="assets/img/descarga.png"/>
+                        <p>Posición:</p>
+                        <p><?php echo $idposicion_jug ?></p>
                         <thead>
                         <tr>
                             <th>Nombre</th>
@@ -98,8 +104,8 @@ foreach ($db->query($consulta_infojug) as $fila) {
                         </tr>
                         </thead>
                         <tr>
-                            <td>peta</td>
-                            <td>Villanueva del Arzobispo</td>
+                            <td><?php echo $alias_jug ?></td>
+                            <td><?php echo $equipos_jug ?></td>
                         </tr>
                         <thead>
                         <tr>
@@ -108,8 +114,8 @@ foreach ($db->query($consulta_infojug) as $fila) {
                         </tr>
                         </thead>
                         <tr>
-                            <td>Español</td>
-                            <td>8</td>
+                            <td><?php echo $nacionalidad_jug ?></td>
+                            <td><?php echo $numero_jug ?></td>
                         </tr>
                         <thead>
                         <tr>
@@ -118,8 +124,8 @@ foreach ($db->query($consulta_infojug) as $fila) {
                         </tr>
                         </thead>
                         <tr>
-                            <td>13/07/2000</td>
-                            <td>Liga Santander</td>
+                            <td><?php echo $fechanac_jug ?></td>
+                            <td><?php echo $liga_jug ?></td>
                         </tr>
 
                         </tbody>
