@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>equipos</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/styles_equipos.css">
+
+
     <!-- Cabecera y pie-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
     <link rel="stylesheet" href="assets/css/Navigation-with-Button.css">
@@ -15,24 +15,45 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
     <link rel="stylesheet" href="assets/css/Footer-Dark.css">
     <link rel="stylesheet" href="assets/css/Header-Blue.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
-        <link rel="stylesheet" href="assets/css/Navigation-with-Button_cabecera.css">
+    <link rel="stylesheet" href="assets/css/Navigation-with-Button_cabecera.css">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/styles_equipos.css">
+
 
 </head>
 
 <body>
         <?php include 'cabecera.php'; ?>
     <?php include 'conexionproyecto.php'; ?>
-
+        <?php
+        $lista = "";
+        $consulta_equipos = "SELECT idequipo, nombre_eq from equipo;";
+        foreach ($db->query($consulta_equipos) as $fila) {
+        $idequipo = $fila['idequipo'];
+        $nombre_eq = $fila['nombre_eq'];
+        $lista .= "<li value=\"" . $idequipo . "\">" . $nombre_eq . "</li>";
+        }
+        //--------------------------------------------------------------------------
+        $infoEquipo = "";
+        $consulta_infoEquipo = "SELECT * from equipo where idequipo=1";
+        foreach ($db->query($consulta_infoEquipo) as $fila) {
+            $nombre_eq = $fila['nombre_eq'];
+            $liga_eq = $fila['liga_eq'];
+            $idestadio_eq = $fila['idestadio_eq'];
+            $division_eq = $fila['division_eq'];
+            $ciudad_eq = $fila['ciudad_eq'];
+            $identrenado_eq = $fila['identrenador_eq'];
+            $provincia_eq = $fila['provincia_eq'];
+            $presidente_eq = $fila['presidente_eq'];
+        }
+        ?>
     <div>
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
-                    <ul>
-                        <li>Villanueva del arzobispo</li>
-                        <li>Jaen</li>
-                        <li>Villacarrillo</li>
-                        <li>Mogón</li>
+                <div class="col-md-3">
+                    <ul id="menu_lateral">
+                        <?php echo $lista ?>
+
                     </ul>
                 </div>
                 <div class="col-md-8"><img src="assets/img/descarga.png"> <div class="table-responsive">
@@ -45,8 +66,8 @@
            </thead>
            <tbody>
                <tr>
-                   <td>C.F Villanueva del arzobispo</td>
-                   <td>Liga de campeones</td>
+                   <td><?php echo $nombre_eq ?></td>
+                   <td><?php echo $liga_eq ?></td>
                </tr>
                 <thead>
                <tr>
@@ -55,8 +76,8 @@
                </tr>
            </thead>
                <tr>
-                   <td>El campo</td>
-                   <td>Primera</td>
+                   <td><?php echo $idestadio_eq ?></td>
+                   <td><?php echo $division_eq ?></td>
                </tr>
                                 <thead>
                <tr>
@@ -65,8 +86,8 @@
                </tr>
            </thead>
                <tr>
-                   <td>Villanueva del arzobispo</td>
-                   <td>Jose Angel Lopez</td>
+                   <td><?php echo $ciudad_eq ?></td>
+                   <td><?php echo $identrenado_eq ?></td>
                </tr>
                                 <thead>
                <tr>
@@ -75,8 +96,8 @@
                </tr>
            </thead>
                <tr>
-                   <td>Jaen</td>
-                   <td>Adrian Ruiz</td>
+                   <td><?php echo $provincia_eq ?></td>
+                   <td><?php echo $presidente_eq ?></td>
                </tr>
             
        </table>
