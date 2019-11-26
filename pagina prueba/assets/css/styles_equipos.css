@@ -1,6 +1,4 @@
-li {
-  list-style: none;
-}
+
 
 table {
   text-align: center;
@@ -18,4 +16,13 @@ td {
 th {
   width: 10px;
 }
+
+#menu_lateral li{
+  list-style: none;
+  color: red;
+  text-align: left;
+  display: block;
+  margin-left: 40px;
+}
+
 
