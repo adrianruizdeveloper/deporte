@@ -287,7 +287,7 @@ img {
 
 li {
   margin-left: 20px;
-  display: initial;
+  display: inline;
 }
 
 #botones_login {
