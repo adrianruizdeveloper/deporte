@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="assets/css/Header-Blue.css">
     <link rel="stylesheet" href="assets/css/styles.css">
      <link rel="stylesheet" href="assets/css/Navigation-with-Button_cabecera.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <?php include 'conexionproyecto.php';
     $consulta="SELECT idpartido, fecha_cal,local_cal,goleslocal_cal,visitante_cal,golesvisitante_cal,idestadio_cal FROM calendario";
 
@@ -48,6 +49,23 @@
 
             <?php
 
+            function localVisitante_estadio($db , $equipo_estadio,$equipooestadio){
+                $hola = "";
+                if ($equipooestadio == 1){
+                    $estadioC = "Select nombre_estadio from estadio where idestadio=".$equipo_estadio.";";
+                    foreach ($db->query($estadioC) as $fila) {
+                        $hola = $fila['nombre_estadio'];
+
+                    }
+                }else if ($equipooestadio == 2) {
+                    $localvisitanteC = "Select nombre_eq from equipo where idequipo=" . $equipo_estadio . ";";
+                    foreach ($db->query($localvisitanteC) as $fila) {
+                        $hola = $fila['nombre_eq'];
+
+                    }
+                }
+                return $hola;
+            }
             // Se crea un bucle que se repetirá tantas veces como filas tenga la consulta.
             foreach ($db->query($consulta) as $fila) {
                 $Jornada = $fila['idpartido'];
@@ -57,42 +75,21 @@
                 $GolesV = $fila['golesvisitante_cal'];
                 $Visitante = $fila['visitante_cal'];
                 $Estadio = $fila['idestadio_cal'];
-            //$localvisitante = "Select nombre_eq from equipo where idequipo=".$equipo.";";
 
-                    /*function localVisitante($equipo){
-                        foreach ($db->query($localvisitante) as $fila) {
-                        $hola = $fila['nombre_eq'];
+                $consultaLocal = localVisitante_estadio($db, $Local,2);
+                $consultaVistante = localVisitante_estadio($db,$Visitante,2);
+                $consultaEstadio = localVisitante_estadio($db,$Estadio,1);
 
-                    }
-                    return $hola;
-                }*/
-                $consulta2 = "Select nombre_eq from equipo where idequipo=".$Local.";";
-                //$consulta2 = "Select nombre_eq from equipo where idequipo=".localvisitante($Local).";";
-                $consulta3 = "Select nombre_eq from equipo where idequipo=".$Visitante.";";
-                //$consulta3 = "Select nombre_eq from equipo where idequipo=".localvisitante($Visitante).";";
-                $consulta4 = "Select * from estadio where idestadio=".$Estadio.";";
-                foreach ($db->query($consulta2) as $fila) {
-                   $Local2 = $fila['nombre_eq'];
-
-                }
-                foreach ($db->query($consulta3) as $fila) {
-                   $Vistante2 = $fila['nombre_eq'];
-
-                }
-                foreach ($db->query($consulta4) as $fila) {
-                    $estadio2 = $fila['nombre_estadio'];
-
-                }
                 ?>
                 <!-- Se crea una fila de la tabla con los datos obtenidos -->
                 <tr><td><?php echo ($Jornada); ?></td>
                     <td><?php echo ($Fecha); ?></td>
-                    <td><?php echo ($Local2); ?></td>
+                    <td><?php echo ($consultaLocal); ?></td>
                     <td><?php echo ($GolesL); ?></td>
-                    <td><?php echo ("VS"); ?></td>
+                    <td><?php echo ("<i class=\"fa fa-handshake-o\"></i>"); ?></td>
                     <td><?php echo ($GolesV); ?></td>
-                    <td><?php echo ($Vistante2); ?></td>
-                    <td><?php echo ($estadio2); ?></td>
+                    <td><?php echo ($consultaVistante); ?></td>
+                    <td><?php echo ($consultaEstadio); ?></td>
 
                 </tr>
                 <?php
