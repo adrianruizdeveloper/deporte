@@ -19,10 +19,10 @@ th {
 
 #menu_lateral li{
   list-style: none;
-  color: red;
   text-align: left;
   display: block;
   margin-left: 40px;
 }
-
-
+#imagen {
+  margin-left:0px;
+}
