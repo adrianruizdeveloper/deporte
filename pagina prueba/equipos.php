@@ -46,6 +46,17 @@
             $provincia_eq = $fila['provincia_eq'];
             $presidente_eq = $fila['presidente_eq'];
         }
+        $consulta_estadio = "SELECT nombre_estadio from estadio where idestadio=".$idestadio_eq.";";
+        foreach ($db->query($consulta_estadio) as $fila) {
+            $idestadio_nombre = $fila['nombre_estadio'];
+
+        }
+        $consulta_entrenador = "SELECT nombre_ent,apellidos_ent from entrenadores where identrenador=".$identrenado_eq.";";
+        foreach ($db->query($consulta_entrenador) as $fila) {
+            $identrenador_nombre = $fila['nombre_ent'] . " " . $fila['apellidos_ent'];;
+
+        }
+
         ?>
     <div>
         <div class="container">
@@ -76,7 +87,7 @@
                </tr>
            </thead>
                <tr>
-                   <td><?php echo $idestadio_eq ?></td>
+                   <td><?php echo $idestadio_nombre ?></td>
                    <td><?php echo $division_eq ?></td>
                </tr>
                                 <thead>
@@ -87,7 +98,7 @@
            </thead>
                <tr>
                    <td><?php echo $ciudad_eq ?></td>
-                   <td><?php echo $identrenado_eq ?></td>
+                   <td><?php echo $identrenador_nombre ?></td>
                </tr>
                                 <thead>
                <tr>
