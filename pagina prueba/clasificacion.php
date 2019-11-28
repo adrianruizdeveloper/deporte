@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="assets/css/Navigation-with-Button_cabecera.css">
 
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/styles_clasificacion.css">
 
 
