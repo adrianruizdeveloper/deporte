@@ -55,6 +55,8 @@ if (isset($_GET['equipo'])) {
         $jugadores .= "<option value=\"" . $idjugador."\">". $alias_jug . "</option>";
     }
 }
+
+
 //_-------------------------------------------------------------_\\
 if (isset($_GET['jugador_select'])) {
     $info_jug = "";
@@ -93,7 +95,12 @@ if ($equipos_jug != "") {
         $liga_jug = $fila['liga_eq'];
     }
 }
-
+if ($idposicion_jug!=""){
+    $consulta_posicion_jug = "SELECT idposicion, nombre_pos from posicion where idposicion=".$idposicion_jug;
+    foreach ($db->query($consulta_posicion_jug) as $fila) {
+        $idposicion_jug = $fila['nombre_pos'];
+    }
+}
 ?>
 <div>
     <div class="container">
