@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
     <link rel="stylesheet" href="assets/css/Footer-Dark.css">
     <link rel="stylesheet" href="assets/css/Header-Blue.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
         <link rel="stylesheet" href="assets/css/Navigation-with-Button_cabecera.css">
 
 </head>
@@ -29,16 +28,20 @@
         <div class="container">
             <div class="form-row">
                 <div class="col-md-6">
-                    <div class="form-group"><input class="form-control" type="text" id="usuario_registro" placeholder="Usuario"><input class="form-control" type="text" id="nombre_registro" placeholder="Apellidos"><input class="form-control" type="text" id="apellidos_registro"
-                            placeholder="Usuario"></div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" id="usuario_registro" placeholder="Usuario">
+                        <input class="form-control" type="text" id="nombre_registro" placeholder="Nombre">
+                        <input class="form-control" type="text" id="apellidos_registro" placeholder="Apellidos"></div>
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group"><input class="form-control" type="email" id="correo_registro" placeholder="Costraseña"><input class="form-control" type="password" id="costrasena_registro" placeholder="Repite Costraseña"><input class="form-control" type="password"
-                            id="costrasena2_registro" placeholder="Repite Costraseña"></div>
+                    <div class="form-group">
+                        <input class="form-control" type="email" id="correo_registro" placeholder="Correo electronico">
+                        <input class="form-control" type="password" id="costrasena_registro" placeholder="Costraseña">
+                        <input class="form-control" type="password" id="costrasena2_registro" placeholder="Repite Costraseña"></div>
                 </div>
             </div>
         </div>
-        <p><button class="btn btn-primary" id="enviar_registro" placeholder="Repite Costraseña">Button</button></p>
+        <p><button class="btn btn-primary" id="enviar_registro">Button</button></p>
     </form>
    <?php include 'pie.php'; ?>
 </body>
