@@ -64,6 +64,7 @@ function listar($db, $tipo)
             </tr>
             </thead>
             <tbody>
+            <?php // echo listar($db, 1); ?>
             <tr>
                 <td>Jose Ángel</td>
                 <td>Mogón C.F</td>
@@ -85,6 +86,7 @@ function listar($db, $tipo)
             </tr>
             </thead>
             <tbody>
+            <?php // echo listar($db, 1); ?>
             <tr>
                 <td>Jose Ángel</td>
                 <td>Mogón C.F</td>
@@ -123,6 +125,7 @@ function listar($db, $tipo)
             </tr>
             </thead>
             <tbody>
+            <?php // echo listar($db, 1); ?>
             <tr>
                 <td>Jose Ángel</td>
                 <td>Mogón C.F</td>
@@ -144,6 +147,7 @@ function listar($db, $tipo)
             </tr>
             </thead>
             <tbody>
+            <?php // echo listar($db, 1); ?>
             <tr>
                 <td>Jose Ángel</td>
                 <td>Mogón C.F</td>
