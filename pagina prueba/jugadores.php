@@ -49,7 +49,7 @@ foreach ($db->query($consulta_equipos) as $fila) {
 if (isset($_GET['equipo'])) {
     $jugadores = "";
     $equipo = (int)$_GET['equipo'];
-    $consulta_jugadores = "SELECT idjugador, alias_jug from jugador,juga   dor_equipo_temporada  where idequipo_jet=" . $equipo. " and Jugador_idjugador=idjugador";
+    $consulta_jugadores = "SELECT idjugador, alias_jug from jugador,jugador_equipo_temporada  where idequipo_jet=" . $equipo. " and Jugador_idjugador=idjugador";
     foreach ($db->query($consulta_jugadores) as $fila) {
         $idjugador = $fila['idjugador'];
         $alias_jug = $fila['alias_jug'];
