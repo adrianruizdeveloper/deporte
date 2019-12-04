@@ -50,13 +50,13 @@ if (isset($_GET['temporada_select'])) {
     $equipo = (int)$_GET['temporada_select'];
     if ($equipo  == 0){
             $nombre_eq_l =  "";
-            $Nombre_lig = "";
+            $nombre_lig = "";
             $idestadio_temeq = "";
             $nombre_div = "";
             $ciudad_eq = "";
             $identrenador_temeq = "";
             $provincia_eq = "";
-            $Presidente_temeq = "";
+            $presidente_temeq = "";
             $idestadio_nombre = "";
             $identrenador_nombre = "";
 
@@ -65,16 +65,14 @@ if (isset($_GET['temporada_select'])) {
         $consulta_infoEquipo = "SELECT * from equipo,temporada_equipo,division,liga,estadio,entrenadores where idestadio_temeq = idestadio AND identrenador_temeq = identrenador AND idequipo = idequipo_temeq AND division_temeq = iddivision AND liga_idliga = idliga  AND  idequipo=" . $equipo;
         foreach ($db->query($consulta_infoEquipo) as $fila) {
             $nombre_eq_l = $fila['nombre_eq'];
-            $Nombre_lig = $fila['Nombre_lig'];
+            $nombre_lig = $fila['nombre_lig'];
             $idestadio_temeq = $fila['idestadio_temeq'];
             $nombre_div = $fila['nombre_div'];
             $ciudad_eq = $fila['ciudad_eq'];
             $identrenador_temeq = $fila['identrenador_temeq'];
             $provincia_eq = $fila['ciudad_eq'];
-            $Presidente_temeq = $fila['Presidente_temeq'];
-
+            $presidente_temeq = $fila['presidente_temeq'];
             $idestadio_nombre = $fila['nombre_estadio'];
-
             $identrenador_nombre = $fila['nombre_ent'] . " " . $fila['apellidos_ent'];
 
         }
@@ -87,7 +85,7 @@ if (isset($_GET['temporada_select'])) {
     $ciudad_eq = "";
     $identrenador_temeq = "";
     $provincia_eq = "";
-    $Presidente_temeq = "";
+    $presidente_temeq = "";
     $idestadio_nombre = "";
     $identrenador_nombre = "";
 }
@@ -124,11 +122,11 @@ if (isset($_GET['temporada_select'])) {
                         <tbody>
                         <tr>
                             <td><?php echo @$nombre_eq_l ?></td>
-                            <td><?php echo @$Nombre_lig ?></td>
+                            <td><?php echo @$nombre_lig ?></td>
                         </tr>
                         <thead>
                         <tr>
-                            <th>Estadio</th>
+                            <th>Estadio</th>s
                             <th>División</th>
                         </tr>
                         </thead>
@@ -154,7 +152,7 @@ if (isset($_GET['temporada_select'])) {
                         </thead>
                         <tr>
                             <td><?php echo @$provincia_eq ?></td>
-                            <td><?php echo @$Presidente_temeq ?></td>
+                            <td><?php echo @$presidente_temeq ?></td>
                         </tr>
 
                     </table>
