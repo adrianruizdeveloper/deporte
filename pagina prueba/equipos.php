@@ -126,13 +126,13 @@ if (isset($_GET['temporada_select'])) {
                         </tr>
                         <thead>
                         <tr>
-                            <th>Estadio</th>s
+                            <th>Estadio</th>
                             <th>División</th>
                         </tr>
                         </thead>
                         <tr>
                             <td><?php echo @$idestadio_nombre ?></td>
-                            <td><?php echo @$nombre_div ?></td>
+                            <td><?php echo @$nombre_div?></td>
                         </tr>
                         <thead>
                         <tr>
