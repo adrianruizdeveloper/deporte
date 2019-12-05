@@ -41,7 +41,7 @@ $url = $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
 foreach ($db->query($consulta_equipos) as $fila) {
     $idequipo = $fila['idequipo'];
     $nombre_eq = $fila['nombre_eq'];
-    $lista .= "<li value=\"" . $idequipo . "\"><a href=?equipo=" . $idequipo . ">" . $nombre_eq . "</a></li>";
+    $lista .= "<li value=\"" . $idequipo . "\"><a href=?equipo=" . $idequipo . "&>" . $nombre_eq . "</a></li>";
 }
 //_-----------------------------------------------------------------------_\\
 
@@ -49,23 +49,23 @@ foreach ($db->query($consulta_equipos) as $fila) {
 if (isset($_GET['equipo'])) {
     $jugadores = "";
     $equipo = (int)$_GET['equipo'];
-    $consulta_jugadores = "SELECT idjugador, alias_jug from jugador,jugador_equipo_temporada  where idequipo_jet=" . $equipo. " and Jugador_idjugador=idjugador";
+    $consulta_jugadores = "SELECT idjugador, alias_jug from jugador,jugador_equipo_temporada  where idequipo_jet=" . $equipo . " and Jugador_idjugador=idjugador";
     foreach ($db->query($consulta_jugadores) as $fila) {
         $idjugador = $fila['idjugador'];
         $alias_jug = $fila['alias_jug'];
-        $jugadores .= "<option value=\"" . $idjugador."\">". $alias_jug . "</option>";
+        $jugadores .= "<option value=\"" . $idjugador . "\">" . $alias_jug . "</option>";
     }
 }
 
 
 //_-------------------------------------------------------------_\\
-@$jugador_actual=$_GET['jugador_select'];
+@$jugador_actual = $_GET['jugador_select'];
 if (isset($jugador_actual)) {
     $info_jug = "";
     $jugador = (int)$_GET['jugador_select'];
     $consulta = "SELECT nombre_jug, apellido_jug, alias_jug, fechanac_jug, nacionalidad_jug, numero_jug_jet, nombre_eq, nombre_pos, Nombre_lig
     from jugador , jugador_equipo_temporada, equipo, posicion, temporada_equipo, division, liga  
-    where Jugador_idjugador=" . $jugador. " and idjugador = ".$jugador ." and idequipo_jet= idequipo
+    where Jugador_idjugador=" . $jugador . " and idjugador = " . $jugador . " and idequipo_jet= idequipo
     and idposicion_jet = idposicion and idequipo_temeq = idequipo and division_temeq = iddivision and liga_idliga = idliga";
     foreach ($db->query($consulta) as $fila) {
         $nombre_jug = $fila['nombre_jug'];
@@ -112,7 +112,7 @@ if (isset($jugador_actual)) {
                             <th class="col-md-8">Apellido</th>
                         </tr>
                         </thead>
-                        <tbody>
+
                         <tr>
                             <td><?php echo @$nombre_jug ?></td>
                             <td><?php echo @$apellido_jug ?></td>
@@ -148,7 +148,7 @@ if (isset($jugador_actual)) {
                             <td><?php echo @$liga_jug ?></td>
                         </tr>
 
-                        </tbody>
+
                     </table>
                 </div>
 

@@ -27,26 +27,32 @@
 <?php include 'conexionproyecto.php'; ?>
 <?php
 $lista = "";
-$consulta_equipos = "SELECT idequipo, nombre_eq from equipo;";
+$consulta_equipos = "SELECT idequipo, nombre_eq from equipo where deporte_iddeporte= 1;";
 $n = 1;
 foreach ($db->query($consulta_equipos) as $fila) {
     $idequipo = $fila['idequipo'];
     $nombre_eq = $fila['nombre_eq'];
-    $lista .= "<tr><td>" . $n . "</td><td></img class=\"escudo\"> " . $nombre_eq . "</td>" . calcular_puntos($db, $idequipo, $nombre_eq) . "</tr>";
+    $lista .= "<tr><td>" . $n . "</td><td></img class=\"escudo\"> " . $nombre_eq . "</td>" . calcular_puntos($db, $idequipo) . "</tr>";
 }
 
 function calcular_puntos($db, $idequipo)
 {
     $puntos = 0;
     $partidos = "";
-    $consulta_puntos = "SELECT local_cal, visitante_cal, goleslocal_cal, golesvisitante_cal, temporada_cal from calendario where temporada_cal = 1";
+    $consulta_puntos = "SELECT local_cal, visitante_cal, goleslocal_cal, golesvisitante_cal, idtemporada_cal from calendario where idtemporada_cal = 1 and local_cal = ".$idequipo." or visitante_cal = ".$idequipo;
     foreach ($db->query($consulta_puntos) as $fila) {
         $local_cal = $fila['local_cal'];
         $visitante_cal = $fila['visitante_cal'];
-        $goleslocal_cal = $fila['goleslocal_cal'];
-        $golesvisitante_cal = $fila['golesvisitante_cal'];
+        if($fila['goleslocal_cal']!== null) {
+            $goleslocal_cal = $fila['goleslocal_cal'];
+            $golesvisitante_cal = $fila['golesvisitante_cal'];
+        } else {
+            $goleslocal_cal = 0;
+            $golesvisitante_cal = 0;
+        }
         $goles_favor = 0;
         $goles_contra = 0;
+
         if ($local_cal == $idequipo) {
             $goles_favor += $goleslocal_cal;
             $goles_contra += $golesvisitante_cal;
