@@ -33,22 +33,23 @@
         $password = trim($_POST['password']);
         if($username != "" && $password != "") {
             try {
-                $query = "select usuario,id_usuario,contrasena from usuarios, contrasenas where usuario=:username and contrasena=:password and id_contrasena_usu = id_contrasena";
+                $query = "select usuario,id_usuario,contrasena from usuarios, contrasenas where usuario=:username and id_contrasena_usu = id_contrasena";
                 $stmt = $db->prepare($query);
                 $stmt->bindParam('username', $username, PDO::PARAM_STR);
-                $stmt->bindValue('password', $password, PDO::PARAM_STR);
+                //$stmt->bindValue('password', $password, PDO::PARAM_STR);
                 $stmt->execute();
                 $count = $stmt->rowCount();
                 $row   = $stmt->fetch(PDO::FETCH_ASSOC);
-                if($count == 1 && !empty($row)) {
+
+                if($count == 1 && !empty($row) && password_verify($password, $row['contrasena'])) {
                     /******************** Your code ***********************/
                     $_SESSION['sess_user_id']   = $row['id_usuario'];
                     $_SESSION['sess_user_name'] = $row['usuario'];
-
                     header('Location: index.php');
                 } else {
                     $msg = "Invalid username and password!";
                 }
+
             } catch (PDOException $e) {
                 echo "Error : ".$e->getMessage();
             }
