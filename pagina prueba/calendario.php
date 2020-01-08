@@ -1,6 +1,3 @@
-<?php include 'conexionproyecto.php';
-include 'cabecera.php';
-?>
 <!DOCTYPE html>
 <html>
 
@@ -18,9 +15,9 @@ include 'cabecera.php';
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
     <link rel="stylesheet" href="assets/css/Footer-Dark.css">
     <link rel="stylesheet" href="assets/css/Header-Blue.css">
-     <link rel="stylesheet" href="assets/css/Navigation-with-Button_cabecera.css">
+    <link rel="stylesheet" href="assets/css/Navigation-with-Button_cabecera.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <?php
+        <?php include 'conexionproyecto.php';
     $consulta="SELECT jornada_cal, fecha_cal,local_cal,goleslocal_cal,visitante_cal,golesvisitante_cal,idestadio_cal FROM calendario order by jornada_cal";
 
     ?>
@@ -29,6 +26,8 @@ include 'cabecera.php';
 </head>
 
 <body>
+                <?php include 'cabecera.php'; ?>
+
     <div class="table-responsive" id="calendario">
         <table class="table">
             <thead>
@@ -49,15 +48,15 @@ include 'cabecera.php';
             <?php
 
             function localVisitante_estadio($db , $equipo_estadio,$equipooestadio){
-                $localVisitante_estadio = "";
+                 $localVisitante_estadio= "";
                 if ($equipooestadio == 1){
-                    $estadioC = "Select nombre_estadio from estadio where idestadio=".$equipo_estadio.";";
+                    $estadioC = "Select nombre_estadio from estadio where idestadio=".$equipo_estadio;
                     foreach ($db->query($estadioC) as $fila) {
                         $localVisitante_estadio = $fila['nombre_estadio'];
 
                     }
                 }else if ($equipooestadio == 2) {
-                    $localvisitanteC = "Select nombre_eq from equipo where idequipo=" . $equipo_estadio . ";";
+                    $localvisitanteC = "Select nombre_eq from equipo where idequipo=" . $equipo_estadio;
                     foreach ($db->query($localvisitanteC) as $fila) {
                         $localVisitante_estadio = $fila['nombre_eq'];
 
@@ -96,6 +95,8 @@ include 'cabecera.php';
             </tbody>
         </table>
     </div>
+
+
            <?php include 'pie.php'; ?>
 
 </body>
