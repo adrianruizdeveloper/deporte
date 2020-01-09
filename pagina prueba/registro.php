@@ -34,12 +34,25 @@
         if(!isset($_POST['futbol_registro'])){
             $futbol_select = 0;
         }else{
-            $futbol_select = trim($_POST['futbol_registro']);
+            $futbol_select = 1;
+        }
+        if(!isset($_POST['futbol_sala_registro'])){
+            $futbol_sala_select = 0;
+        }else{
+            $futbol_sala_select = 1;
+        }
+        if(!isset($_POST['baloncesto_registro'])){
+            $baloncesto_select = 0;
+        }else{
+            $baloncesto_select = 1;
+        }
+        if(!isset($_POST['balonmano_registro'])){
+            $balonmano_select = 0;
+        }else{
+            $balonmano_select = 1;
         }
 
-        $futbol_sala_select = trim($_POST['futbol_sala_registro']);
-        $baloncesto_select = trim($_POST['baloncesto_registro']);
-        $balonmano_select = trim($_POST['balonmano_registro']);
+
 
         if (strlen($contrasena_registro) < 6) {
             $msg = "La costraseña tiene que tener minimo 6 carapteres";
@@ -48,21 +61,29 @@
         } else {
             $hora = date("Y-m-d H:i:s");
             $contraseña = password_hash($contrasena_registro, PASSWORD_DEFAULT);
-            $sql1 = $db->prepare("INSERT INTO contrasenas(contrasena,fecha_modificacion) VALUES (:contrasena_registro,' $hora ');");
-            $sql1->bindParam('contrasena_registro', $contraseña, PDO::PARAM_STR);
-            $sql1->execute();
+            $sql_contrasena = $db->prepare("INSERT INTO contrasenas(contrasena,fecha_modificacion) VALUES (:contrasena_registro,' $hora ');");
+            $sql_contrasena->bindParam('contrasena_registro', $contraseña, PDO::PARAM_STR);
+            $sql_contrasena->execute();
             $consulta_contraseña = "Select id_contrasena from contrasenas where contrasena = \"$contraseña\" AND  fecha_modificacion = \"$hora\";";
             $idcontra = 0;
             foreach ($db->query($consulta_contraseña) as $fila) {
                 $idcontra = $fila['id_contrasena'];
             }
-            $sql2 = $db->prepare("INSERT INTO usuarios(usuario,nombre_usu,apellido_usu,fecha_nac_usu, n_telefono_usu, email,id_contrasena_usu) VALUES (:usuario_registro,:nombre_registro,:apellidos_registro, :fecha_nac , :numero_telf , :correo_registro,  $idcontra);");
-            $sql2->bindParam('usuario_registro', $usuario_registro, PDO::PARAM_STR);
-            $sql2->bindParam('nombre_registro', $nombre_registro, PDO::PARAM_STR);
-            $sql2->bindParam('apellidos_registro', $apellidos_registro, PDO::PARAM_STR);
-            $sql2->bindParam('fecha_nac', $fecha_nac, PDO::PARAM_STR);
-            $sql2->bindParam('numero_telf', $numero_telf, PDO::PARAM_STR);
-            $sql2->bindParam('correo_registro', $correo_registro, PDO::PARAM_STR);
+            $sql_usuario = $db->prepare("INSERT INTO usuarios(usuario,nombre_usu,apellido_usu,fecha_nac_usu, n_telefono_usu, email,id_contrasena_usu) VALUES (:usuario_registro,:nombre_registro,:apellidos_registro, :fecha_nac , :numero_telf , :correo_registro,  $idcontra);");
+            $sql_usuario->bindParam('usuario_registro', $usuario_registro, PDO::PARAM_STR);
+            $sql_usuario->bindParam('nombre_registro', $nombre_registro, PDO::PARAM_STR);
+            $sql_usuario->bindParam('apellidos_registro', $apellidos_registro, PDO::PARAM_STR);
+            $sql_usuario->bindParam('fecha_nac', $fecha_nac, PDO::PARAM_STR);
+            $sql_usuario->bindParam('numero_telf', $numero_telf, PDO::PARAM_STR);
+            $sql_usuario->bindParam('correo_registro', $correo_registro, PDO::PARAM_STR);
+            $sql_usuario->execute();
+
+            $sql2 = $db->prepare("INSERT INTO deportes_sel(id_usuario_dep, futbol_dep, baloncesto_dep, futbol_sala, balonmano_dep) VALUES (:usuario,:futbol, :baloncesto, :futbol_sala, :balonmano);");
+            $sql2->bindParam('usuario', $usuario_registro, PDO::PARAM_STR);
+            $sql2->bindParam('futbol', $futbol_select, PDO::PARAM_STR);
+            $sql2->bindParam('baloncesto', $baloncesto_select, PDO::PARAM_STR);
+            $sql2->bindParam('futbol_sala', $futbol_select, PDO::PARAM_STR);
+            $sql2->bindParam('balonmano', $balonmano_select, PDO::PARAM_STR);
             $sql2->execute();
         }
     }
