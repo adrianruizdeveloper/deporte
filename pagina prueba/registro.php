@@ -31,27 +31,26 @@
         $fecha_nac = $_POST['fecha_nac_registro'];
         $fecha_nac = dateformat($fecha_nac);
         $numero_telf = trim($_POST['num_telef_registro']);
-        if(!isset($_POST['futbol_registro'])){
+        if (!isset($_POST['futbol_registro'])) {
             $futbol_select = 0;
-        }else{
+        } else {
             $futbol_select = 1;
         }
-        if(!isset($_POST['futbol_sala_registro'])){
+        if (!isset($_POST['futbol_sala_registro'])) {
             $futbol_sala_select = 0;
-        }else{
+        } else {
             $futbol_sala_select = 1;
         }
-        if(!isset($_POST['baloncesto_registro'])){
+        if (!isset($_POST['baloncesto_registro'])) {
             $baloncesto_select = 0;
-        }else{
+        } else {
             $baloncesto_select = 1;
         }
-        if(!isset($_POST['balonmano_registro'])){
+        if (!isset($_POST['balonmano_registro'])) {
             $balonmano_select = 0;
-        }else{
+        } else {
             $balonmano_select = 1;
         }
-
 
 
         if (strlen($contrasena_registro) < 6) {
@@ -78,8 +77,16 @@
             $sql_usuario->bindParam('correo_registro', $correo_registro, PDO::PARAM_STR);
             $sql_usuario->execute();
 
+            $query = "select usuario,id_usuario from usuarios where usuario=:username";
+            $stmt = $db->prepare($query);
+            $stmt->bindParam('username', $usuario_registro, PDO::PARAM_STR);
+            $stmt->execute();
+            $count = $stmt->rowCount();
+            $row   = $stmt->fetch(PDO::FETCH_ASSOC);
+            $usuario = $row['id_usuario'];
+
             $sql2 = $db->prepare("INSERT INTO deportes_sel(id_usuario_dep, futbol_dep, baloncesto_dep, futbol_sala, balonmano_dep) VALUES (:usuario,:futbol, :baloncesto, :futbol_sala, :balonmano);");
-            $sql2->bindParam('usuario', $usuario_registro, PDO::PARAM_STR);
+            $sql2->bindParam('usuario', $usuario, PDO::PARAM_STR);
             $sql2->bindParam('futbol', $futbol_select, PDO::PARAM_STR);
             $sql2->bindParam('baloncesto', $baloncesto_select, PDO::PARAM_STR);
             $sql2->bindParam('futbol_sala', $futbol_select, PDO::PARAM_STR);
@@ -88,10 +95,12 @@
         }
     }
 
-    function dateformat($fecha){
+    function dateformat($fecha)
+    {
         $fecha = strtotime($fecha);
-        return date(date('Y',$fecha)."-".date('m',$fecha)."-".date('d',$fecha));
+        return date(date('Y', $fecha) . "-" . date('m', $fecha) . "-" . date('d', $fecha));
     }
+
     ?>
 </head>
 
@@ -125,22 +134,27 @@
                     <input class="form-control" type="password" id="contrasena_registro2" name="contrasena_registro2"
                            placeholder="Repite Contraseña" required>
                     <div class="checkbox">
-                        <label class="checkbox-inline"><input type="checkbox" id="futbol_registro" name="futbol_registro"
+                        <label class="checkbox-inline"><input type="checkbox" id="futbol_registro"
+                                                              name="futbol_registro"
                                                               value="">&nbsp; Fútbol &nbsp;</label>
-                        <label class="checkbox-inline"><input type="checkbox" id="futbol_sala_registro" name="futbol_sala_registro"
+                        <label class="checkbox-inline"><input type="checkbox" id="futbol_sala_registro"
+                                                              name="futbol_sala_registro"
                                                               value="">&nbsp; Fútbol Sala &nbsp;</label>
                     </div>
                     <div class="checkbox">
-                        <label class="checkbox-inline"><input type="checkbox" id="baloncesto_registro" name="baloncesto_registro"
+                        <label class="checkbox-inline"><input type="checkbox" id="baloncesto_registro"
+                                                              name="baloncesto_registro"
                                                               value="">&nbsp; Baloncesto &nbsp;</label>
-                        <label class="checkbox-inline"><input type="checkbox" id="balonmano_registro" name="balonmano_registro"
+                        <label class="checkbox-inline"><input type="checkbox" id="balonmano_registro"
+                                                              name="balonmano_registro"
                                                               value="">&nbsp; Balonmano &nbsp;</label>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-11"><p class="boton"><input type="submit" name="enviar_registro" id="enviar_registro" value="Login"/></p></div>
+    <div class="col-md-11"><p class="boton"><input type="submit" name="enviar_registro" id="enviar_registro"
+                                                   value="Login"/></p></div>
 </form>
 
 <span class="text-danger"><?php echo @$msg ?></span>
