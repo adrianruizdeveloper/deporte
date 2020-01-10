@@ -45,7 +45,7 @@ if (isset($_POST['submitBtnLogin'])) {
                 $_SESSION['sess_user_id'] = $row['id_usuario'];
                 setcookie('id_usuario', $row["id_usuario"]);
                 $_SESSION['sess_user_name'] = $row['usuario'];
-                setcookie('usuario', $row["usuario"]);
+                //setcookie('usuario', $row["usuario"]);
                 header('Location: index.php');
             } else {
                 $msg = "Invalid username and password!";
@@ -66,7 +66,7 @@ if (isset($_POST['submitBtnLogin'])) {
     <input class="form-control" type="password" name="password" id="password" placeholder="Costraseña" value=""
            autocomplete="off" style="text-align: center;">
     <p style="text-align: center;">"captcha"</p>
-    <p><input type="submit" name="submitBtnLogin" id="submitBtnLogin" value="Login"/></p>
+    <p style="text-align: center;"><input type="submit" name="submitBtnLogin" id="submitBtnLogin" value="Login"/></p>
 </form>
 <span class="text-danger"><?php echo @$msg; ?></span>
 
