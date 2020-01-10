@@ -2,10 +2,10 @@
 include 'conexionusuarios.php';
 $menu = "";
 
-if (!isset($_SESSION['sess_user_id'])) {
+if (!isset($_COOKIE['id_usuario'])) {
     //header('Location: login.php');
     $menu = "<li class=\"nav-item\"><a class=\"nav-link\" href=\"#\">FÚTBOL</a></li>
-            <li class=\"nav-item\"><a class=\"nav-link\" href=\"#\">FUTBOL SALA</a></li>
+            <li class=\"nav-item\"><a class=\"nav-link\" href=\"#\">FÚTBOL SALA</a></li>
             <li class=\"nav-item\"><a class=\"nav-link\" href=\"#\">BALONCESTO</a></li>
             <li class=\"nav-item\"><a class=\"nav-link\" href=\"#\">BALONMANO</a></li>";
 } else {
@@ -22,7 +22,7 @@ if (!isset($_SESSION['sess_user_id'])) {
         $menu .= '<li class="nav-item"><a class="nav-link" href="#">FÚTBOL</a></li>';
     }
     if ($futbol_sala == 1) {
-        $menu .= '<li class="nav-item"><a class="nav-link" href="#">FUTBOL SALA</a></li>';
+        $menu .= '<li class="nav-item"><a class="nav-link" href="#">FÚTBOL SALA</a></li>';
     }
 
     if ($baloncesto == 1) {

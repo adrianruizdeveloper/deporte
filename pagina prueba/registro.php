@@ -60,15 +60,15 @@
         } else {
             $hora = date("Y-m-d H:i:s");
             $contraseña = password_hash($contrasena_registro, PASSWORD_DEFAULT);
-            $sql_contrasena = $db->prepare("INSERT INTO contrasenas(contrasena,fecha_modificacion) VALUES (:contrasena_registro,' $hora ');");
+            $sql_contrasena = $db2->prepare("INSERT INTO contrasenas(contrasena,fecha_modificacion) VALUES (:contrasena_registro,' $hora ');");
             $sql_contrasena->bindParam('contrasena_registro', $contraseña, PDO::PARAM_STR);
             $sql_contrasena->execute();
             $consulta_contraseña = "Select id_contrasena from contrasenas where contrasena = \"$contraseña\" AND  fecha_modificacion = \"$hora\";";
             $idcontra = 0;
-            foreach ($db->query($consulta_contraseña) as $fila) {
+            foreach ($db2->query($consulta_contraseña) as $fila) {
                 $idcontra = $fila['id_contrasena'];
             }
-            $sql_usuario = $db->prepare("INSERT INTO usuarios(usuario,nombre_usu,apellido_usu,fecha_nac_usu, n_telefono_usu, email,id_contrasena_usu) VALUES (:usuario_registro,:nombre_registro,:apellidos_registro, :fecha_nac , :numero_telf , :correo_registro,  $idcontra);");
+            $sql_usuario = $db2->prepare("INSERT INTO usuarios(usuario,nombre_usu,apellido_usu,fecha_nac_usu, n_telefono_usu, email,id_contrasena_usu) VALUES (:usuario_registro,:nombre_registro,:apellidos_registro, :fecha_nac , :numero_telf , :correo_registro,  $idcontra);");
             $sql_usuario->bindParam('usuario_registro', $usuario_registro, PDO::PARAM_STR);
             $sql_usuario->bindParam('nombre_registro', $nombre_registro, PDO::PARAM_STR);
             $sql_usuario->bindParam('apellidos_registro', $apellidos_registro, PDO::PARAM_STR);
@@ -78,14 +78,14 @@
             $sql_usuario->execute();
 
             $query = "select usuario,id_usuario from usuarios where usuario=:username";
-            $stmt = $db->prepare($query);
+            $stmt = $db2->prepare($query);
             $stmt->bindParam('username', $usuario_registro, PDO::PARAM_STR);
             $stmt->execute();
             $count = $stmt->rowCount();
             $row   = $stmt->fetch(PDO::FETCH_ASSOC);
             $usuario = $row['id_usuario'];
 
-            $sql2 = $db->prepare("INSERT INTO deportes_sel(id_usuario_dep, futbol_dep, baloncesto_dep, futbol_sala, balonmano_dep) VALUES (:usuario,:futbol, :baloncesto, :futbol_sala, :balonmano);");
+            $sql2 = $db2->prepare("INSERT INTO deportes_sel(id_usuario_dep, futbol_dep, baloncesto_dep, futbol_sala, balonmano_dep) VALUES (:usuario,:futbol, :baloncesto, :futbol_sala, :balonmano);");
             $sql2->bindParam('usuario', $usuario, PDO::PARAM_STR);
             $sql2->bindParam('futbol', $futbol_select, PDO::PARAM_STR);
             $sql2->bindParam('baloncesto', $baloncesto_select, PDO::PARAM_STR);
