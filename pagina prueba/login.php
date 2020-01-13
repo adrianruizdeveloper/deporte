@@ -45,7 +45,6 @@ if (isset($_POST['submitBtnLogin'])) {
                 $_SESSION['sess_user_id'] = $row['id_usuario'];
                 setcookie('id_usuario', $row["id_usuario"]);
                 $_SESSION['sess_user_name'] = $row['usuario'];
-                //setcookie('usuario', $row["usuario"]);
                 header('Location: index.php');
             } else {
                 $msg = "Invalid username and password!";

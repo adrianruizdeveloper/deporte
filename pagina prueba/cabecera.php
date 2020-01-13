@@ -3,13 +3,14 @@ include 'conexionusuarios.php';
 $menu = "";
 
 if (!isset($_COOKIE['id_usuario'])) {
-    //header('Location: login.php');
+    //$login_logout = '<li><a href="login.php">Login</a></li>
+    //                <li><a href="registro.php">Register</li>';
     $menu = "<li class=\"nav-item\"><a class=\"nav-link\" href=\"#\">FÚTBOL</a></li>
             <li class=\"nav-item\"><a class=\"nav-link\" href=\"#\">FÚTBOL SALA</a></li>
             <li class=\"nav-item\"><a class=\"nav-link\" href=\"#\">BALONCESTO</a></li>
             <li class=\"nav-item\"><a class=\"nav-link\" href=\"#\">BALONMANO</a></li>";
 } else {
-
+    //$login_logout = '<li><a href="logout.php">Logout</a></li>';
     $consulta_menu1 = "select * from deportes_sel where id_usuario_dep = " . $_COOKIE['id_usuario'];
     foreach ($db2->query($consulta_menu1) as $fila) {
         $futbol = $fila['futbol_dep'];
