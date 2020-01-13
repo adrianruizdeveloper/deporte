@@ -34,16 +34,18 @@ foreach ($db->query($consulta_equipos) as $fila) {
 }
 //--------------------------------------------------------------------------
 if (isset($_GET['equipo'])) {
+    setcookie('equipo_select', $_GET['equipo']);
+    }
+if(isset($_COOKIE['equipo_select']))
     $temporada = "";
-    $equipo = (int)$_GET['equipo'];
-    $consulta_jugadores = "SELECT idtemporada_temeq,ano_principio,ano_fin from temporada_equipo,temporada where idtemporada=idtemporada_temeq AND  idequipo_temeq=" . $equipo;
+    $consulta_jugadores = "SELECT idtemporada_temeq,ano_principio,ano_fin from temporada_equipo,temporada where idtemporada=idtemporada_temeq AND  idequipo_temeq=" . @$_COOKIE['equipo_select'];
     foreach ($db->query($consulta_jugadores) as $fila) {
         $idtemporada_temeq = $fila['idtemporada_temeq'];
         $ano_principio = $fila['ano_principio'];
         $ano_fin = $fila['ano_fin'];
         $temporada .= "<option value=\"" . $idtemporada_temeq."\">". $ano_principio . "-" . $ano_fin  . "</option>";
     }
-}
+
 
 if (isset($_GET['temporada_select'])) {
     $jugadores = "";
