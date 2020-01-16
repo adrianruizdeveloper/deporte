@@ -32,7 +32,7 @@ if (!isset($_COOKIE['id_usuario'])) {
     if ($balonmano == 1) {
         $menu .= '<li class="nav-item"><a class="nav-link" href="#">BALONMANO</a></li>';
     }
-}
+}?>
 <div>
     <div>
         <div class="row">
