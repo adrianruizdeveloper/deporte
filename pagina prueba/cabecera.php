@@ -1,7 +1,7 @@
 <?php
 include 'conexionusuarios.php';
 $menu = "";
-
+//holaaasdff
 if (!isset($_COOKIE['id_usuario'])) {
     //$login_logout = '<li><a href="login.php">Login</a></li>
     //                <li><a href="registro.php">Register</li>';
@@ -59,4 +59,3 @@ if (!isset($_COOKIE['id_usuario'])) {
         </ul>
     </div>
 </div>
-  
