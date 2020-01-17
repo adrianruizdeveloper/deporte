@@ -1,15 +1,12 @@
 <?php
-
-require ('../conexionproyecto.php');
+require ('../../conexionproyecto.php');
 error_reporting(E_ERROR);
-$id_eq = $_GET['id_eq'];
-
-$query = "SELECT idjugador FROM jugador WHERE provincia_id = '$id_provincia' ORDER BY municipio" ;
-$resultado = $mysqli->query($query);
+$id_dep = $_GET['id_dep'];
+$query = "SELECT idequipo, nombre_eq FROM equipo where deporte_iddeporte=".$id_dep;
 $html="[";
-while($row = $resultado->fetch_assoc())
+foreach ($db->query($query) as $row)
 {
-    $html.= "{\"value\":".$row['id'].",\"label\":\"".$row['municipio']."\"},";
+    $html.= "{\"value\":".$row['idequipo'].",\"label\":\"".$row['nombre_eq']."\"},";
 }
 $html.=  "]";
 $html=str_replace(",]","]", $html);
