@@ -37,6 +37,9 @@ foreach ($db->query($consulta_equipos) as $fila) {
 
 function calcular_puntos($db, $idequipo)
 {
+    $contador = 0;
+    $goles_favor = 0;
+    $goles_contra = 0;
     $puntos = 0;
     $partidos = "";
     $consulta_puntos = "SELECT local_cal, visitante_cal, goleslocal_cal, golesvisitante_cal, idtemporada_cal from calendario where idtemporada_cal = 1 and local_cal = " . $idequipo . " or visitante_cal = " . $idequipo;
@@ -46,12 +49,7 @@ function calcular_puntos($db, $idequipo)
         if ($fila['goleslocal_cal'] !== null) {
             $goleslocal_cal = $fila['goleslocal_cal'];
             $golesvisitante_cal = $fila['golesvisitante_cal'];
-        } else {
-            $goleslocal_cal = 0;
-            $golesvisitante_cal = 0;
         }
-        $goles_favor = 0;
-        $goles_contra = 0;
 
         if ($local_cal == $idequipo) {
             $goles_favor += $goleslocal_cal;
@@ -60,14 +58,24 @@ function calcular_puntos($db, $idequipo)
             $goles_favor += $golesvisitante_cal;
             $goles_contra += $goleslocal_cal;
         }
+
         if ($local_cal == $idequipo && $goleslocal_cal > $golesvisitante_cal || $visitante_cal == $idequipo && $golesvisitante_cal > $goleslocal_cal) {
             $puntos += 3;
-            $partidos .= "<i style=\"font-size:24px\" class=\"fa\">&#xf058;</i>";
+            if ($contador < 5) {
+                $partidos .= "<i style=\"font-size:24px\" class=\"fa\">&#xf058;</i>";
+                $contador += 1;
+            }
         } else if ($goleslocal_cal == $golesvisitante_cal) {
             $puntos += 1;
-            $partidos .= "<i style=\"font-size:24px\" class=\"fa\">&#xf056;</i>";
+            if ($contador < 5) {
+                $partidos .= "<i style=\"font-size:24px\" class=\"fa\">&#xf056;</i>";
+                $contador += 1;
+            }
         } else {
-            $partidos .= "<i style=\"font-size:24px\" class=\"fa\">&#xf00d;</i>";
+            if ($contador < 5) {
+                $partidos .= "<i style=\"font-size:24px\" class=\"fa\">&#xf00d;</i>";
+                $contador += 1;
+            }
         }
     }
     return "<td>$puntos</td><td>" . @$goles_favor . "</td><td>" . @$goles_contra . "</td><td>" . (int)(@$goles_favor - @$goles_contra) . "</td><td>" . $partidos . "</td>";
