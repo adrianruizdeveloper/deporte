@@ -64,7 +64,6 @@
                 }
                 return $localVisitante_estadio;
             }
-            // Se crea un bucle que se repetirá tantas veces como filas tenga la consulta.
             foreach ($db->query($consulta) as $fila) {
                 $Jornada = $fila['jornada_cal'];
                 $Fecha = $fila['fecha_cal'];
@@ -78,7 +77,6 @@
                 $consultaVistante = localVisitante_estadio($db,$Visitante,2);
                 $consultaEstadio = localVisitante_estadio($db,$Estadio,1);
                 ?>
-                <!-- Se crea una fila de la tabla con los datos obtenidos -->
                 <tr><td><?php echo ($Jornada); ?></td>
                     <td><?php echo ($Fechaespañola); ?></td>
                     <td><?php echo ($consultaLocal); ?></td>
