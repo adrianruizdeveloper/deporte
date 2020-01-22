@@ -69,10 +69,10 @@ if (isset($_GET['temporada_select'])) {
         $idestadio_nombre = "";
         $identrenador_nombre = "";
     }else {
-        $consulta_infoEquipo = "SELECT * from equipo,temporada_equipo,division,liga,estadio,entrenadores where idestadio_temeq = idestadio AND identrenador_temeq = identrenador AND idequipo = idequipo_temeq AND division_temeq = iddivision AND liga_idliga = idliga  AND  idequipo=" . $equipo;
+        $consulta_infoEquipo = "SELECT * from equipo,temporada_equipo,division,estadio,entrenadores, pais where idestadio_temeq = idestadio AND identrenador_temeq = identrenador AND idequipo = idequipo_temeq AND idpais=idpais_div and iddivision_temeq = iddivision  AND  idequipo=" . $equipo;
         foreach ($db->query($consulta_infoEquipo) as $fila) {
             $nombre_eq_l = $fila['nombre_eq'];
-            $nombre_lig = $fila['nombre_lig'];
+            $nombre_lig = $fila['nombre_pais'];
             $idestadio_temeq = $fila['idestadio_temeq'];
             $nombre_div = $fila['nombre_div'];
             $ciudad_eq = $fila['ciudad_eq'];
@@ -130,7 +130,7 @@ if (isset($_GET['temporada_select'])) {
                         <thead>
                         <tr>
                             <th>Nombre</th>
-                            <th>Liga</th>
+                            <th>País</th>
                         </tr>
                         </thead>
                         <tbody>

@@ -41,6 +41,9 @@ function calcular_puntos($db, $idequipo)
     $goles_favor = 0;
     $goles_contra = 0;
     $puntos = 0;
+    $ganados = 0;
+    $empates = 0;
+    $perdidos = 0;
     $partidos = "";
     $consulta_puntos = "SELECT local_cal, visitante_cal, goleslocal_cal, golesvisitante_cal, idtemporada_cal from calendario where idtemporada_cal = 1 and local_cal = " . $idequipo . " or visitante_cal = " . $idequipo;
     foreach ($db->query($consulta_puntos) as $fila) {
@@ -54,6 +57,7 @@ function calcular_puntos($db, $idequipo)
         if ($local_cal == $idequipo) {
             $goles_favor += $goleslocal_cal;
             $goles_contra += $golesvisitante_cal;
+
         } else {
             $goles_favor += $golesvisitante_cal;
             $goles_contra += $goleslocal_cal;
@@ -64,9 +68,11 @@ function calcular_puntos($db, $idequipo)
             if ($contador < 5) {
                 $partidos .= "<i style=\"font-size:24px\" class=\"fa\">&#xf058;</i>";
                 $contador += 1;
+                $ganados +=1;
             }
         } else if ($goleslocal_cal == $golesvisitante_cal) {
             $puntos += 1;
+            $empates +=1;
             if ($contador < 5) {
                 $partidos .= "<i style=\"font-size:24px\" class=\"fa\">&#xf056;</i>";
                 $contador += 1;
@@ -75,10 +81,11 @@ function calcular_puntos($db, $idequipo)
             if ($contador < 5) {
                 $partidos .= "<i style=\"font-size:24px\" class=\"fa\">&#xf00d;</i>";
                 $contador += 1;
+                $perdidos +=1;
             }
         }
     }
-    return "<td>$puntos</td><td>" . @$goles_favor . "</td><td>" . @$goles_contra . "</td><td>" . (int)(@$goles_favor - @$goles_contra) . "</td><td>" . $partidos . "</td>";
+    return "<td>$puntos</td><td>$ganados</td><td>$empates</td><td>$perdidos</td><td>" . @$goles_favor . "</td><td>" . @$goles_contra . "</td><td>" . (int)(@$goles_favor - @$goles_contra) . "</td><td>" . $partidos . "</td>";
 }
 
 
@@ -90,8 +97,11 @@ function calcular_puntos($db, $idequipo)
             <th>Posición</th>
             <th>Equipo</th>
             <th>Puntos</th>
-            <th>Goles a favor</th>
-            <th>Goles en contra</th>
+            <th>Ganados</th>
+            <th>Empatados</th>
+            <th>Perdidos</th>
+            <th>GF</th>
+            <th>GC</th>
             <th>Diferencia de goles</th>
             <th>Ultimos 5 partidos</th>
         </tr>

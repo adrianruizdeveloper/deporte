@@ -58,11 +58,11 @@ if (isset($_COOKIE['equipo_seleccionado'])) {
 @$jugador_actual = $_GET['jugador_select'];
 if (isset($jugador_actual)) {
     $info_jug = "";
-    $jugador = (int)$_GET['jugador_select'];
-    $consulta = "SELECT nombre_jug, apellido_jug, alias_jug, fechanac_jug, nacionalidad_jug, numero_jug_jet, nombre_eq, nombre_pos, Nombre_lig
-    from jugador , jugador_equipo_temporada, equipo, posicion, temporada_equipo, division, liga  
-    where Jugador_idjugador=" . $jugador . " and idjugador = " . $jugador . " and idequipo_jet= idequipo
-    and idposicion_jet = idposicion and idequipo_temeq = idequipo and division_temeq = iddivision and liga_idliga = idliga";
+    $id_jug = (int)$_GET['jugador_select'];
+    $consulta = "SELECT nombre_jug, apellido_jug, alias_jug, fechanac_jug, nacionalidad_jug, numero_jug_jet, nombre_eq, nombre_pos, nombre_div 
+    from jugador , jugador_equipo_temporada, equipo, posicion, temporada_equipo, division
+    where Jugador_idjugador=" . $id_jug . " and idjugador = " . $id_jug . " and idequipo_jet= idequipo
+    and idposicion_jet = idposicion and idequipo_temeq = idequipo and iddivision_temeq = iddivision";
     foreach ($db->query($consulta) as $fila) {
         $nombre_jug = $fila['nombre_jug'];
         $apellido_jug = $fila['apellido_jug'];
@@ -72,7 +72,7 @@ if (isset($jugador_actual)) {
         $numero_jug = $fila['numero_jug_jet'];
         $equipo_jug = $fila['nombre_eq'];
         $idposicion_jug = $fila['nombre_pos'];
-        $liga_jug = $fila['Nombre_lig'];
+        $liga_jug = $fila['nombre_div'];
 
     }
 }

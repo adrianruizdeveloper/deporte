@@ -35,7 +35,7 @@ if (!isset($_COOKIE['id_usuario'])) {
 <div>
     <div>
         <div class="row">
-            <div class="col-md-8"><img src="assets/img/descarga.png">
+            <div class="col-md-8"><div class="div_logo"><img id="logo" class="img-fluid" src="assets/img/logo.jpg"></div>
                 <p id="titulo_pagina">Proyecto</p>
             </div>
             <div class="col-md-4">
