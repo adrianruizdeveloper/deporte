@@ -31,5 +31,3 @@ recabados por la navegación o contratación de servicios a través de su sitio 
             </div>
         </footer>
     </div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
