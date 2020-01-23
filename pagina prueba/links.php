@@ -1,7 +1,6 @@
 <?php
 function links($archivo){
     $links = '
- <link rel="stylesheet" type="text/css" href="assets/css/strength.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
 <link rel="stylesheet" href="assets/css/Navigation-with-Button.css">
 <link rel="stylesheet" href="assets/css/Pretty-Header.css">
@@ -11,7 +10,10 @@ function links($archivo){
 <link rel="stylesheet" href="assets/css/Header-Blue.css">
 <link rel="stylesheet" href="assets/css/Navigation-with-Button_cabecera.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">';
+<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/seleccion_deporte.js"></script>';
+
     switch($archivo){
         case "calendario":
             $links .= '<link rel="stylesheet" href="assets/css/styles_calendario.css">';
