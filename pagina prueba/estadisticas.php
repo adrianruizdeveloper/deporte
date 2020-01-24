@@ -99,7 +99,7 @@ function listar($db, $tipo)
             </tr>
             </thead>
             <tbody>
-            <?php  echo listar($db, 1); ?>
+            <?php  echo listar($db, 9); ?>
             </tbody>
 
 
