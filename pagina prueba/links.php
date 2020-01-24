@@ -1,6 +1,7 @@
 <?php
 function links($archivo){
     $links = '
+ <link rel="stylesheet" type="text/css" href="assets/css/strength.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
 <link rel="stylesheet" href="assets/css/Navigation-with-Button.css">
 <link rel="stylesheet" href="assets/css/Pretty-Header.css">
