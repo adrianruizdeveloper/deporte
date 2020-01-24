@@ -124,7 +124,7 @@
                     <input class="form-control" type="email" id="correo_registro" name="correo_registro"
                            placeholder="Correo electronico" required>
                     <input id="myPassword" class="form-control" type="password" id="contrasena_registro" name="contrasena_registro"
-                           placeholder="Repite Contraseña" required>
+                           placeholder="Contraseña" required>
                     <input class="form-control" type="password" id="contrasena_registro2" name="contrasena_registro2"
                            placeholder="Repite Contraseña" required>
                     <div class="checkbox">
