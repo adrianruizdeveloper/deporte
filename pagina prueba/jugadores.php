@@ -79,22 +79,12 @@ if (isset($jugador_actual)) {
     }
 
 }
-//$temporada1 = "select ano_principio,ano_fin from temporada where idtemporada = " . @$_COOKIE['temporada_seleccionado'].";";
-
-$temporada1 = "seleciona una temporada";
-switch (@$_COOKIE['temporada_seleccionado']){
-    case 1:
-        $temporada1 = "2016-2017";
-        break;
-    case 2:
-        $temporada1 = "2017-2018";
-        break;
-        case 3:
-    $temporada1 = "2018-2019";
-    break;
-    case 4:
-    $temporada1 = "2019-2020";
-    break;
+$temporada1 = "select ano_principio,ano_fin from temporada where idtemporada = " . @$_COOKIE['temporada_seleccionado'].";";
+$temporada2 = "";
+foreach ($db->query($temporada1) as $fila) {
+    $ano_principio = $fila['ano_principio'];
+    $ano_fin = $fila['ano_fin'];
+    $temporada2 = "$ano_principio - $ano_fin";
 }
 
 ?>
@@ -124,7 +114,7 @@ switch (@$_COOKIE['temporada_seleccionado']){
                     </select>
                     <button type="submit">Seleccionar Temporada</button>
                 </form>
-                <p>Temporada seleccionada:<b> <?php echo $temporada1;?></b></p>
+                <p>Temporada seleccionada:<b> <?php echo $temporada2;?></b></p>
 
                 <div class="table-responsive">
                     <table class="table">
