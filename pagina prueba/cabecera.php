@@ -34,14 +34,15 @@ if (!isset($_COOKIE['id_usuario'])) {
 }?>
 <div>
     <div>
+
         <div class="row">
             <div class="col-md-8"><div class="div_logo"><img id="logo" class="img-fluid" src="assets/img/logo.jpg"></div>
                 <p id="titulo_pagina">Proyecto</p>
             </div>
             <div class="col-md-4">
                 <ul id="botones_login">
-                    <li><a href="login.php">Login</a></li>
-                    <li><a href="registro.php">Register</li>
+                    <li><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModallogin">Login</button></li>
+                    <li><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalregistro">Registro</button></li>
                 </ul>
             </div>
         </div>
@@ -58,4 +59,39 @@ if (!isset($_COOKIE['id_usuario'])) {
     </div>
 </div>
 
+    <!-- Button to Open the Modal -->
+
+
+    <!-- The Modal -->
+    <div class="modal" id="myModallogin">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">login</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <?php include 'login.php'; ?>
+                </div>
+
+
+
+                <div class="modal" id="myModalregistro">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Registro</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <?php include 'registro.php'; ?>
+                            </div>
 

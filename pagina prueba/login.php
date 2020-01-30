@@ -1,68 +1,56 @@
-<!DOCTYPE html>
-<html>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>login</title>
-    <?php include 'links.php';
-    links("login");
+<!-- Modal body -->
+<div class="modal-body">
+    <?php
+    include 'conexionusuarios.php';
+    $msg = "";
+    if (isset($_POST['submitBtnLogin'])) {
+        $username = trim($_POST['username']);
+        $password = trim($_POST['password']);
+        if ($username != "" && $password != "") {
+            try {
+                $query = "select usuario,id_usuario,contrasena from usuarios, contrasenas where usuario=:username and id_contrasena_usu = id_contrasena";
+                $stmt = $db2->prepare($query);
+                $stmt->bindParam('username', $username, PDO::PARAM_STR);
+                $stmt->execute();
+                $count = $stmt->rowCount();
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                if ($count == 1 && !empty($row) && password_verify($password, $row['contrasena'])) {
+
+                    $_SESSION['sess_user_id'] = $row['id_usuario'];
+                    setcookie('id_usuario', $row["id_usuario"]);
+                    $_SESSION['sess_user_name'] = $row['usuario'];
+                    header('Location: index.php');
+                } else {
+                    $msg = "Invalid username and password!";
+                }
+
+            } catch (PDOException $e) {
+                echo "Error : " . $e->getMessage();
+            }
+        } else {
+            $msg = "Both fields are required!";
+        }
+    }
     ?>
 
-</head>
+    <form method="post">
+        <input class="form-control" type="text" name="username" id="username" value="" autocomplete="off"
+               placeholder="Usuario" style="text-align: center;">
 
-<body>
+        <input class="form-control" type="password" name="password" id="password" placeholder="Costraseña" value=""
+               autocomplete="off" style="text-align: center;">
+        <p style="text-align: center;"><input type="submit" name="submitBtnLogin" id="submitBtnLogin" value="Login"/></p>
+    </form>
+    <span class="text-danger"><?php echo @$msg; ?></span>
+</div>
 
-<?php
-include 'cabecera.php';
-session_start();
-include 'conexionusuarios.php';
-?>
-<?php
-$msg = "";
-if (isset($_POST['submitBtnLogin'])) {
-    $username = trim($_POST['username']);
-    $password = trim($_POST['password']);
-    if ($username != "" && $password != "") {
-        try {
-            $query = "select usuario,id_usuario,contrasena from usuarios, contrasenas where usuario=:username and id_contrasena_usu = id_contrasena";
-            $stmt = $db2->prepare($query);
-            $stmt->bindParam('username', $username, PDO::PARAM_STR);
-            $stmt->execute();
-            $count = $stmt->rowCount();
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+<!-- Modal footer -->
+<div class="modal-footer">
+    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+</div>
 
-            if ($count == 1 && !empty($row) && password_verify($password, $row['contrasena'])) {
-
-                $_SESSION['sess_user_id'] = $row['id_usuario'];
-                setcookie('id_usuario', $row["id_usuario"]);
-                $_SESSION['sess_user_name'] = $row['usuario'];
-                header('Location: index.php');
-            } else {
-                $msg = "Invalid username and password!";
-            }
-
-        } catch (PDOException $e) {
-            echo "Error : " . $e->getMessage();
-        }
-    } else {
-        $msg = "Both fields are required!";
-    }
-}
-?>
-<form method="post">
-    <input class="form-control" type="text" name="username" id="username" value="" autocomplete="off"
-           placeholder="Usuario" style="text-align: center;">
-
-    <input class="form-control" type="password" name="password" id="password" placeholder="Costraseña" value=""
-           autocomplete="off" style="text-align: center;">
-    <p style="text-align: center;">"captcha"</p>
-    <p style="text-align: center;"><input type="submit" name="submitBtnLogin" id="submitBtnLogin" value="Login"/></p>
-</form>
-<span class="text-danger"><?php echo @$msg; ?></span>
-
-<?php include 'pie.php'; ?>
-</body>
-
-</html>
-
+</div>
+</div>
+</div>
