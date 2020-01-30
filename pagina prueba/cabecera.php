@@ -59,18 +59,16 @@ if (!isset($_COOKIE['id_usuario'])) {
     </div>
 </div>
 
-    <!-- Button to Open the Modal -->
 
+    <div class="modal" id="myModallogin" data-backdrop="static">
 
-    <!-- The Modal -->
-    <div class="modal" id="myModallogin">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
 
                 <!-- Modal Header -->
                 <div class="modal-header">
                     <h4 class="modal-title">login</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close" data-dismiss="modal"><i class='fa fa-close' style='font-size:24px;color:red'></i></button>
                 </div>
                 <!-- Modal body -->
                 <div class="modal-body">
@@ -79,14 +77,14 @@ if (!isset($_COOKIE['id_usuario'])) {
 
 
 
-                <div class="modal" id="myModalregistro">
+                <div class="modal" id="myModalregistro" data-backdrop="static">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
 
                             <!-- Modal Header -->
                             <div class="modal-header">
                                 <h4 class="modal-title">Registro</h4>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <button type="button" class="close" data-dismiss="modal"><i class='fa fa-close' style='font-size:24px;color:red'></i></button>
                             </div>
 
 
