@@ -61,7 +61,7 @@
                 return $deporte;
             }
             foreach ($db->query($consulta_calendario) as $fila) {
-                if (consultarDeporte($db, $fila{'local_cal'}) == $_SESSION['deporte'] && consultarDeporte($db, $fila{'visitante_cal'}) == $_SESSION['deporte']){
+                if (consultarDeporte($db, $fila{'local_cal'}) == @$_SESSION['deporte'] && consultarDeporte($db, $fila{'visitante_cal'}) == @$_SESSION['deporte']){
                     $Jornada = $fila['jornada_cal'];
                     $Fecha = $fila['fecha_cal'];
                     $Fechaespañola = date("d/m/Y", strtotime($Fecha));
