@@ -11,7 +11,7 @@ if (!isset($_SESSION['sess_user_id'])) {
             <li class=\"nav-item\"><a class=\"nav-link\" href=\"#\" onclick=\"seleccionar_deporte(4)\">BALONMANO</a></li>";
 } else {
     $login_logout = '<li><a href="logout.php"> <button type="button" class="btn btn-primary">Logout</button></a></li>';
-    $consulta_menu1 = "select * from deportes_sel where id_usuario_dep = " . $_COOKIE['id_usuario'];
+    $consulta_menu1 = "select * from deportes_sel where id_usuario_dep = " . $_SESSION['sess_user_id'];
     foreach ($db2->query($consulta_menu1) as $fila) {
         $futbol = $fila['futbol_dep'];
         $baloncesto = $fila['baloncesto_dep'];
