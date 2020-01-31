@@ -1,4 +1,3 @@
-
 <!-- Modal body -->
 <div class="modal-body">
     <?php
@@ -23,34 +22,27 @@
                     $_SESSION['sess_user_name'] = $row['usuario'];
                     header('Location: index.php');
                 } else {
-                    $msg = "Invalid username and password!";
+                    $msg = "Usuario o contraseña incorrectos";
                 }
 
             } catch (PDOException $e) {
                 echo "Error : " . $e->getMessage();
             }
         } else {
-            $msg = "Both fields are required!";
+            $msg = "Rellene el usuario y la contraseña";
         }
     }
     ?>
-
     <form method="post">
         <input class="form-control" type="text" name="username" id="username" value="" autocomplete="off"
-               placeholder="Usuario" style="text-align: center;">
+               placeholder="Usuario">
 
         <input class="form-control" type="password" name="password" id="password" placeholder="Costraseña" value=""
-               autocomplete="off" style="text-align: center;">
-        <p style="text-align: center;"><input type="submit" name="submitBtnLogin" id="submitBtnLogin" value="Login"/></p>
+               autocomplete="off">
+        <p style="text-align: center;"><input type="submit" name="submitBtnLogin" id="submitBtnLogin" value="Login"/>
+        </p>
     </form>
     <span class="text-danger"><?php echo @$msg; ?></span>
 </div>
 
 <!-- Modal footer -->
-<div class="modal-footer">
-    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-</div>
-
-</div>
-</div>
-</div>

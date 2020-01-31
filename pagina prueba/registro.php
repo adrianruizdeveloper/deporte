@@ -143,14 +143,5 @@
 <script type="text/javascript" src="assets/js/strength.js"></script>
 <script type="text/javascript" src="assets/js/costrasena.js"></script>
 
- <!-- Modal footer -->
- <div class="modal-footer">
-     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
- </div>
-
- </div>
- </div>
- </div>
-
 
 
