@@ -20,18 +20,22 @@
 
 function nombre_equipo($db, $id_equipo_consulta){
     $consulta = "select nombre_eq from equipo where idequipo = ". $id_equipo_consulta;
-    foreach ($db->query($consulta) as $fila){
-        $nombre = $fila['nombre_eq'];
+    foreach ($db->query($consulta) as $fila) {
+            $nombre = $fila['nombre_eq'];
         }
         return $nombre;
+
 }
 $lista = "";
-$consulta_equipos = "SELECT idequipo, nombre_eq from equipo;";
+$consulta_equipos = "SELECT idequipo, nombre_eq,deporte_iddeporte from equipo;";
 foreach ($db->query($consulta_equipos) as $fila) {
-    $idequipo = $fila['idequipo'];
-    $nombre_eq = $fila['nombre_eq'];
-    $lista .= "<li value=\"" . $idequipo . "\"><a href=?equipo=" . $idequipo . ">" . $nombre_eq . "</a></li>";
+            if ($fila{'deporte_iddeporte'} == $_SESSION['deporte']){
+                $idequipo = $fila['idequipo'];
+                $nombre_eq = $fila['nombre_eq'];
+                $lista .= "<li value=\"" . $idequipo . "\"><a href=?equipo=" . $idequipo . ">" . $nombre_eq . "</a></li>";
+            }
 }
+
 //--------------------------------------------------------------------------
 if (isset($_GET['equipo'])) {
     setcookie('equipo_select', $_GET['equipo']);

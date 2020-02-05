@@ -22,11 +22,14 @@
 $temporada = "";
 $idtemporada = 1;
 $lista = "";
-$consulta_equipos = "SELECT idequipo, nombre_eq from equipo;";
+$consulta_equipos = "SELECT idequipo, nombre_eq,deporte_iddeporte from equipo;";
 foreach ($db->query($consulta_equipos) as $fila) {
+if ($fila{'deporte_iddeporte'} == $_SESSION['deporte']) {
+
     $idequipo = $fila['idequipo'];
     $nombre_eq = $fila['nombre_eq'];
     $lista .= "<li value=\"" . $idequipo . "\"><a href=?equipo=" . $idequipo . ">" . $nombre_eq . "</a></li>";
+}
 }
 
 //_-----------------------------------------------------------------------_\\
@@ -54,8 +57,6 @@ if (isset($_COOKIE['equipo_seleccionado']) && isset($_COOKIE['temporada_seleccio
         $jugadores .= "<option value=\"" . $idjugador . "\">" . $alias_jug . "</option>";
     }
 }
-
-
 //_-------------------------------------------------------------_\\
 @$jugador_actual = $_GET['jugador_select'];
 if (isset($jugador_actual)) {
