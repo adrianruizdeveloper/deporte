@@ -6,19 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Calendario</title>
     <?php include 'links.php';
-    session_start();
     links("calendario");
     include 'conexionproyecto.php';
     $consulta_calendario="SELECT jornada_cal, fecha_cal,local_cal,goleslocal_cal,visitante_cal,golesvisitante_cal,idestadio_cal FROM calendario order by jornada_cal";
-
     ?>
-
-
 </head>
 
 <body>
                 <?php include 'cabecera.php'; ?>
-
     <div class="table-responsive" id="calendario">
         <table class="table">
             <thead>
@@ -35,7 +30,6 @@
             </thead>
             <tbody>
             <?php
-
             function localVisitante_estadio($db , $equipo_estadio,$equipooestadio){
                  $localVisitante_estadio= "";
                 if ($equipooestadio == 1){

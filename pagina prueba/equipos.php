@@ -86,7 +86,6 @@ if (isset($_GET['temporada_select'])) {
         }
 
     }
-    // $Fechaespañola = date("d/m/Y", strtotime($Fecha));
 } else {
     $nombre_eq = "";
     $Nombre_lig = "";

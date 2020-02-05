@@ -45,7 +45,7 @@ if (@$_SESSION['deporte'] != null) {
                     $equipo = $fila['nombre_eq'];
                 }else {
                     exit();
-                   
+
                 }
             }
 
