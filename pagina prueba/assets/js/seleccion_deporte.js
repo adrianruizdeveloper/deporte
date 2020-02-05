@@ -1,5 +1,5 @@
 function seleccionar_deporte(valor){
-    var url = 'seleccionar_deporte.php';
+    var url = 'getdeporte.php';
     $.ajax({
         type: 'POST',
         url: url,
