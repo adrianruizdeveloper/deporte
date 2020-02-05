@@ -1,5 +1,5 @@
 function seleccionar_deporte(valor){
-    var url = 'getdeporte.php';
+    var url = 'seleccionar_deporte.php';
     $.ajax({
         type: 'POST',
         url: url,
@@ -9,3 +9,4 @@ function seleccionar_deporte(valor){
         }
     });
 }
+
