@@ -1,6 +1,8 @@
 <!-- Modal body -->
 <div class="modal-body">
     <?php
+    session_start();
+
     include 'conexionusuarios.php';
     $msg = "";
     if (isset($_POST['submitBtnLogin'])) {
@@ -20,6 +22,7 @@
                     $_SESSION['sess_user_id'] = $row['id_usuario'];
                     setcookie('id_usuario', $row["id_usuario"]);
                     $_SESSION['sess_user_name'] = $row['usuario'];
+                    $_SESSION['conectado'] = true;
                     header('Location: index.php');
                 } else {
                     $msg = "Usuario o contraseña incorrectos";
@@ -44,5 +47,3 @@
     </form>
     <span class="text-danger"><?php echo @$msg; ?></span>
 </div>
-
-<!-- Modal footer -->

@@ -1,38 +1,43 @@
 <?php
-session_start();
-include 'conexionusuarios.php';
-$menu = "";
-if (!isset($_SESSION['sess_user_id'])) {
-    $login_logout = '<li><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModallogin">Login</button></li>
+
+
+    include 'conexionusuarios.php';
+    $menu = "";
+    if (!isset($_SESSION['sess_user_id'])) {
+        $login_logout = '<li><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModallogin">Login</button></li>
                     <li> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalregistro">Registro</button></li>';
-    $menu = "<li class=\"nav-item\"><a class=\"nav-link\" href=\"#\" onclick=\"seleccionar_deporte(1)\">FÚTBOL</a></li>
+        $menu = "<li class=\"nav-item\"><a class=\"nav-link\" href=\"#\" onclick=\"seleccionar_deporte(1)\">FÚTBOL</a></li>
             <li class=\"nav-item\"><a class=\"nav-link\" href=\"#\" onclick=\"seleccionar_deporte(2)\">FÚTBOL SALA</a></li>
             <li class=\"nav-item\"><a class=\"nav-link\" href=\"#\" onclick=\"seleccionar_deporte(3)\">BALONCESTO</a></li>
             <li class=\"nav-item\"><a class=\"nav-link\" href=\"#\" onclick=\"seleccionar_deporte(4)\">BALONMANO</a></li>";
-} else {
-    $login_logout = '<li><a href="logout.php"> <button type="button" class="btn btn-primary">Logout</button></a></li>';
-    $consulta_menu1 = "select * from deportes_sel where id_usuario_dep = " . $_SESSION['sess_user_id'];
-    foreach ($db2->query($consulta_menu1) as $fila) {
-        $futbol = $fila['futbol_dep'];
-        $baloncesto = $fila['baloncesto_dep'];
-        $futbol_sala = $fila['futbol_dep'];
-        $balonmano = $fila['balonmano_dep'];
+    } else {
+        $login_logout = '<li><a href="logout.php"> <button type="button" class="btn btn-primary">Logout</button></a></li>';
+        $consulta_menu1 = "select * from deportes_sel where id_usuario_dep = " . $_SESSION['sess_user_id'];
+        foreach ($db2->query($consulta_menu1) as $fila) {
+            $futbol = $fila['futbol_dep'];
+            $baloncesto = $fila['baloncesto_dep'];
+            $futbol_sala = $fila['futbol_dep'];
+            $balonmano = $fila['balonmano_dep'];
 
-    }
-    if ($futbol == 1) {
-        $menu .= '<li class="nav-item"><a class="nav-link" href="#" onclick="seleccionar_deporte(1)">FÚTBOL</a></li>';
-    }
-    if ($futbol_sala == 1) {
-        $menu .= '<li class="nav-item"><a class="nav-link" href="#" onclick="seleccionar_deporte(2)">FÚTBOL SALA</a></li>';
+        }
+        if ($futbol == 1) {
+            $menu .= '<li class="nav-item"><a class="nav-link" href="#" onclick="seleccionar_deporte(1)">FÚTBOL</a></li>';
+        }
+        if ($futbol_sala == 1) {
+            $menu .= '<li class="nav-item"><a class="nav-link" href="#" onclick="seleccionar_deporte(2)">FÚTBOL SALA</a></li>';
+        }
+
+        if ($baloncesto == 1) {
+            $menu .= '<li class="nav-item"><a class="nav-link" href="#" onclick="seleccionar_deporte(3)">BALONCESTO</a></li>';
+        }
+        if ($balonmano == 1) {
+            $menu .= '<li class="nav-item"><a class="nav-link" href="#" onclick="seleccionar_deporte(4)">BALONMANO</a></li>';
+        }
     }
 
-    if ($baloncesto == 1) {
-        $menu .= '<li class="nav-item"><a class="nav-link" href="#" onclick="seleccionar_deporte(3)">BALONCESTO</a></li>';
-    }
-    if ($balonmano == 1) {
-        $menu .= '<li class="nav-item"><a class="nav-link" href="#" onclick="seleccionar_deporte(4)">BALONMANO</a></li>';
-    }
-} ?>
+
+
+?>
 <div>
     <div>
 
