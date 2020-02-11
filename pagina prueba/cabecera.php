@@ -1,6 +1,5 @@
 <?php
 
-
     include 'conexionusuarios.php';
     $menu = "";
     if (!isset($_SESSION['sess_user_id'])) {

@@ -34,14 +34,6 @@ if (!isset($_SESSION["conectado"])) {
             return $deporte;
         }
 
-        foreach ($db->query($consulta_equipos) as $fila) {
-            if (consultarDeporte($db, $fila{'idequipo'}) == $_SESSION['deporte']) {
-                $idequipo = $fila['idequipo'];
-                $nombre_eq = $fila['nombre_eq'];
-                $lista .= "<tr><td>" . $n . "</td><td></img class=\"escudo\"> " . $nombre_eq . "</td>" . calcular_puntos($db, $idequipo) . "</tr>";
-            }
-        }
-
         function calcular_puntos($db, $idequipo)
         {
             $contador = 0;
@@ -104,6 +96,16 @@ if (!isset($_SESSION["conectado"])) {
             return "<td>$puntos</td><td>$jugados</td><td>$ganados</td><td>$empates</td><td>$perdidos</td><td>" . @$goles_favor . "</td><td>" . @$goles_contra . "</td><td>" . (int)(@$goles_favor - @$goles_contra) . "</td><td>" . $partidos . "</td>";
 
         }
+
+        foreach ($db->query($consulta_equipos) as $fila) {
+            if (consultarDeporte($db, $fila['idequipo']) == $_SESSION['deporte']) {
+                $idequipo = $fila['idequipo'];
+                $nombre_eq = $fila['nombre_eq'];
+                $lista .= "<tr><td>" . $n . "</td><td></img class=\"escudo\"> " . $nombre_eq . "</td>" . calcular_puntos($db, $idequipo) . "</tr>";
+            }
+        }
+
+
     }
 }
 

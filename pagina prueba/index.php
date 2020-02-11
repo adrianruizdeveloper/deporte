@@ -13,7 +13,9 @@
 </head>
 
 <body>
-    <?php include 'cabecera.php'; ?>
+    <?php
+    session_start();
+    include 'cabecera.php'; ?>
 
     <div>
         <div class="container">
