@@ -104,7 +104,7 @@ if (!isset($_SESSION["conectado"])) {
                 if (consultarDeporte($db, $fila['idequipo']) == $_SESSION['deporte']) {
                     $idequipo = $fila['idequipo'];
                     $nombre_eq = $fila['nombre_eq'];
-                    $lista .= "<tr><td>" . $n . "</td><td></img class=\"escudo\"> " . $nombre_eq . "</td>" . calcular_puntos($db, $idequipo) . "</tr>";
+                    $lista .= "<tr><td>" . $n++ . "</td><td></img class=\"escudo\"> " . $nombre_eq . "</td>" . calcular_puntos($db, $idequipo) . "</tr>";
                 }
             }
 
@@ -120,13 +120,13 @@ if (!isset($_SESSION["conectado"])) {
                     <th>Posición</th>
                     <th>Equipo</th>
                     <th>Puntos</th>
-                    <th>Jugados</th>
-                    <th>Ganados</th>
-                    <th>Empatados</th>
-                    <th>Perdidos</th>
+                    <th>PJ</th>
+                    <th>PG</th>
+                    <th>PE</th>
+                    <th>PP</th>
                     <th>GF</th>
                     <th>GC</th>
-                    <th>Diferencia de goles</th>
+                    <th>DG</th>
                     <th>Ultimos 5 partidos</th>
                 </tr>
                 </thead>
