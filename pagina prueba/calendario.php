@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Calendario</title>
     <?php include 'links.php';
+    //Calgamos los links
     links("calendario");
     include 'conexionproyecto.php';
+    //Seleccionamos los datos que vamos a necesitar mas adelante de la tabla calendario
     $consulta_calendario = "SELECT jornada_cal, fecha_cal,local_cal,goleslocal_cal,visitante_cal,golesvisitante_cal,idestadio_cal FROM calendario order by jornada_cal";
     ?>
 </head>
@@ -16,11 +18,13 @@
 <?php
 session_start();
 if (!isset($_SESSION["conectado"])) {
+    //Si no tiene la session iniciada le manda al index
     header("location:index.php");
 } else {
 
 include 'cabecera.php';
 if (!isset($_SESSION['deporte'])){
+    //Si no ha seleccionado un deporte le muestra un mensaje diciedno que debe seleccionar un deporte
     echo "<p style='color: red'>Selecciona un deporte</p>";
 }else{
 ?>

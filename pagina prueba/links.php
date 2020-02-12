@@ -36,6 +36,9 @@ function links($archivo){
         case "registro":
             $links.= '<link rel="stylesheet" href="assets/css/styles_registro.css">';
             break;
+        case "index":
+            $links .= '<link rel="stylesheet" href="assets/css/styles_index.css">';
+            break;
     }
     echo $links;
 }
