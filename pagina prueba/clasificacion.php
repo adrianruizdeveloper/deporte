@@ -6,10 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>clasificacion</title>
 
+
     <?php include "links.php";
     links("clasificacion");
     ?>
+    <script type="text/javascript">
+        $(function() {
 
+            $("table").tablesorter({
+             sortList: [[2,1], [4,1]],
+                theme : "bootstrap",
+
+                widthFixed: true,
+
+                widgets : [ "filter", "columns", "zebra" ],
+
+                widgetOptions : {
+                  zebra : ["even", "odd"],
+
+
+                    columns: [ "primary", "secondary", "tertiary" ],
+
+                    filter_reset : ".reset",
+
+                    filter_cssFilter: [
+                        'form-control',
+                        'form-control',
+                        'form-control custom-select', // select needs custom class names :(
+                        'form-control',
+                        'form-control',
+                        'form-control',
+                        'form-control'
+                    ]
+
+                }
+            })
+
+
+        });
+    </script>
 </head>
 
 <body>
@@ -93,7 +128,7 @@ if (!isset($_SESSION["conectado"])) {
 
                 }
                 if ($jugados == 0) {
-                    return "<td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>";
+                    return "<td>0</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>";
 
                 }
                 return "<td>$puntos</td><td>$jugados</td><td>$ganados</td><td>$empates</td><td>$perdidos</td><td>" . @$goles_favor . "</td><td>" . @$goles_contra . "</td><td>" . (int)(@$goles_favor - @$goles_contra) . "</td><td>" . $partidos . "</td>";
@@ -104,21 +139,20 @@ if (!isset($_SESSION["conectado"])) {
                 if (consultarDeporte($db, $fila['idequipo']) == $_SESSION['deporte']) {
                     $idequipo = $fila['idequipo'];
                     $nombre_eq = $fila['nombre_eq'];
-                    $lista .= "<tr><td>" . $n++ . "</td><td></img class=\"escudo\"> " . $nombre_eq . "</td>" . calcular_puntos($db, $idequipo) . "</tr>";
+                    $lista .= "<tr><td>" . 1 . "</td><td></img class=\"escudo\"> " . $nombre_eq . "</td>" . calcular_puntos($db, $idequipo) . "</tr>";
                 }
             }
-
 
         }
 
 
         ?>
         <div class="table-responsive">
-            <table class="table">
+            <table  class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th>Posición</th>
-                    <th>Equipo</th>
+                    <th >Posición</th>
+                    <th >Equipo</th>
                     <th>Puntos</th>
                     <th>PJ</th>
                     <th>PG</th>
