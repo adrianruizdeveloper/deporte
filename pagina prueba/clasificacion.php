@@ -128,7 +128,7 @@ if (!isset($_SESSION["conectado"])) {
 
                 }
                 if ($jugados == 0) {
-                    return "<td>0</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>";
+                    return "<td>0</td><td></td><td></td></td><td></td><td></td><td></td><td></td><td></td><td></td>";
 
                 }
                 return "<td>$puntos</td><td>$jugados</td><td>$ganados</td><td>$empates</td><td>$perdidos</td><td>" . @$goles_favor . "</td><td>" . @$goles_contra . "</td><td>" . (int)(@$goles_favor - @$goles_contra) . "</td><td>" . $partidos . "</td>";
