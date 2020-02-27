@@ -48,11 +48,12 @@ if (!isset($_SESSION["conectado"])) {
 
 //--------------------------------------------------------------------------
         if (isset($_GET['equipo'])) {
-            setcookie('equipo_select', $_GET['equipo']);
+            $_SESSION['equipo_select'] = $_GET['equipo'];
+            //setcookie('equipo_select', $_GET['equipo']);
         }
-        if (isset($_COOKIE['equipo_select'])) {
+        if (isset($_SESSION['equipo_select'])) {
             $temporada = "";
-            $consulta_jugadores = "SELECT idtemporada_temeq,ano_principio,ano_fin from temporada_equipo,temporada where idtemporada=idtemporada_temeq AND  idequipo_temeq=" . @$_COOKIE['equipo_select'];
+            $consulta_jugadores = "SELECT idtemporada_temeq,ano_principio,ano_fin from temporada_equipo,temporada where idtemporada=idtemporada_temeq AND  idequipo_temeq=" . @$_SESSION['equipo_select'];
             foreach ($db->query($consulta_jugadores) as $fila) {
                 $idtemporada_temeq = $fila['idtemporada_temeq'];
                 $ano_principio = $fila['ano_principio'];
@@ -61,8 +62,10 @@ if (!isset($_SESSION["conectado"])) {
             }
         }
         if (isset($_GET['temporada_select'])) {
+            $_SESSION['temporada_select'] = $_GET['temporada_select'];
             $jugadores = "";
-            $equipo = (int)$_GET['temporada_select'];
+            $equipo = (int)$_SESSION['equipo_select'];
+            $temporada_select = (int)$_SESSION['temporada_select'];
             if ($equipo == 0) {
                 $nombre_eq_l = "";
                 $nombre_lig = "";
@@ -75,7 +78,7 @@ if (!isset($_SESSION["conectado"])) {
                 $idestadio_nombre = "";
                 $identrenador_nombre = "";
             } else {
-                $consulta_infoEquipo = "SELECT * from equipo,temporada_equipo,division,estadio,entrenadores, pais where idestadio_temeq = idestadio AND identrenador_temeq = identrenador AND idequipo = idequipo_temeq AND idpais=idpais_div and iddivision_temeq = iddivision  AND  idequipo=" . $equipo;
+                $consulta_infoEquipo = "SELECT * from equipo,temporada_equipo,division,estadio,entrenadores, pais where idestadio_temeq = idestadio AND identrenador_temeq = identrenador AND idequipo = ".$equipo." AND idpais=idpais_div and iddivision_temeq = ".$temporada_select."  AND  idequipo=" . $equipo;
                 foreach ($db->query($consulta_infoEquipo) as $fila) {
                     $nombre_eq_l = $fila['nombre_eq'];
                     $nombre_lig = $fila['nombre_pais'];
@@ -89,7 +92,7 @@ if (!isset($_SESSION["conectado"])) {
                     $identrenador_nombre = $fila['nombre_ent'] . " " . $fila['apellidos_ent'];
 
                 }
-                $consulta_partidos = "select fecha_cal, local_cal, goleslocal_cal, golesvisitante_cal, visitante_cal from calendario where idtemporada_cal = " . $_GET['temporada_select'] . " and local_cal = " . $_COOKIE['equipo_select'] . " or visitante_cal = " . $_COOKIE['equipo_select'] . " order by fecha_cal desc";
+                $consulta_partidos = "select fecha_cal, local_cal, goleslocal_cal, golesvisitante_cal, visitante_cal from calendario where idtemporada_cal = " . $_GET['temporada_select'] . " and local_cal = " . $_SESSION['equipo_select'] . " or visitante_cal = " . $_SESSION['equipo_select'] . " order by fecha_cal desc";
                 $listado = "";
                 foreach ($db->query($consulta_partidos) as $fila) {
                     $fecha = date("d/m/Y", strtotime($fila['fecha_cal']));
