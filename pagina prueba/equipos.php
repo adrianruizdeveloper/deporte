@@ -49,7 +49,6 @@ if (!isset($_SESSION["conectado"])) {
 //--------------------------------------------------------------------------
         if (isset($_GET['equipo'])) {
             $_SESSION['equipo_select'] = $_GET['equipo'];
-            //setcookie('equipo_select', $_GET['equipo']);
         }
         if (isset($_SESSION['equipo_select'])) {
             $temporada = "";
