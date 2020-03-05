@@ -17,6 +17,7 @@ function links($archivo){
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="assets/js/seleccion_deporte.js"></script>';
+    //Dependiendo desde donde se le llama a este archivo se ponen unos estilos o otros
     switch($archivo){
         case "calendario":
             $links .= '<link rel="stylesheet" href="assets/css/styles_calendario.css">';

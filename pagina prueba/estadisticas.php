@@ -23,12 +23,15 @@ if (!isset($_SESSION["conectado"])) {
     include 'cabecera.php';
     include 'conexionproyecto.php';
     if (!isset($_SESSION['deporte'])) {
+        //Si no ha seleccionado ningun deporte le pedimos al usuario que seleccione un deporte
+
         echo "<p style='color: red'>Selecciona un deporte</p>";
     } else {
         if (@$_SESSION['deporte'] != null) {
             function consultarDeporte($db, $id_equipo)
             {
                 $consulta_equipo = "select deporte_iddeporte from equipo where idequipo = " . $id_equipo;
+
                 foreach ($db->query($consulta_equipo) as $fila) {
                     $deporte = $fila['deporte_iddeporte'];
                 }
@@ -39,7 +42,7 @@ if (!isset($_SESSION["conectado"])) {
             {
 
                 $lista = "";
-                // SELECT idjugador_inc1, count(idtincidencia_inc) as cantidad_inc from incidencia where idtincidencia_inc = 1 GROUP BY idtincidencia_inc order by idjugador_inc1;
+                //Muestra el jugado y la cantidad de una incidencia
                 $consulta_inc = "SELECT idjugador1_inc, count(idjugador1_inc) as cantidad_inc from incidencia where idtincidencia_inc = " . $tipo . "  GROUP BY  idjugador1_inc order by cantidad_inc desc limit 5;";
                 foreach ($db->query($consulta_inc) as $fila) {
                     $jugador = $fila['idjugador1_inc'];
@@ -51,6 +54,7 @@ if (!isset($_SESSION["conectado"])) {
                             $jugador = $fila['alias_jug'];
                             $equipo = $fila['nombre_eq'];
                         } else {
+                            //Si no ha seleccionado un deporte no sale nada y se sale del bucle
                             exit();
 
                         }

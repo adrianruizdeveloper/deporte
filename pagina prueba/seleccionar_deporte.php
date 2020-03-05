@@ -2,7 +2,7 @@
 $deporte = $_POST['valor'];
 
 session_start();
-
+//Segun el numero se selecciona un deporte o otro y se guarda en cookies
 switch ($deporte) {
 case 1:
 $_SESSION['deporte'] = 1;

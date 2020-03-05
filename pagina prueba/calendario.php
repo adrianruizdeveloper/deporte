@@ -47,6 +47,7 @@ if (!isset($_SESSION['deporte'])){
         <?php
         function localVisitante_estadio($db, $equipo_estadio, $equipooestadio)
         {
+            //Muestra el estadio dependiendo si es local o visitante
             $localVisitante_estadio = "";
             if ($equipooestadio == 1) {
                 $estadioC = "Select nombre_estadio from estadio where idestadio=" . $equipo_estadio;
@@ -74,6 +75,7 @@ if (!isset($_SESSION['deporte'])){
         }
 
         foreach ($db->query($consulta_calendario) as $fila) {
+            //Guarda los datos en variables y muestra los partidos
             if (consultarDeporte($db, $fila{'local_cal'}) == @$_SESSION['deporte'] && consultarDeporte($db, $fila{'visitante_cal'}) == @$_SESSION['deporte']) {
                 $Jornada = $fila['jornada_cal'];
                 $Fecha = $fila['fecha_cal'];

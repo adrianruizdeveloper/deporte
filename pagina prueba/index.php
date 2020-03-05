@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Principal</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+
     <?php include 'links.php';
+    //Carga los links propios del index
     links("index");
     ?>
 
@@ -16,7 +18,6 @@
     <?php
     session_start();
     include 'cabecera.php'; ?>
-
     <div>
         <div class="container">
             <div class="row">

@@ -16,18 +16,21 @@
 <?php
 session_start();
 if (!isset($_SESSION["conectado"])) {
+    //Si no esta con la session iniciada no puede asceder
     header("location:index.php");
 } else {
 
     include 'cabecera.php';
     include 'conexionproyecto.php';
     if (!isset($_SESSION['deporte'])) {
+        //Si no ha seleccionado ningun deporte le pedimos al usuario que seleccione un deporte
         echo "<p style='color: red'>Selecciona un deporte</p>";
     } else {
 
 
         function nombre_equipo($db, $id_equipo_consulta)
         {
+            //Devuelve le nombre del equipo pasandole un id
             $consulta = "select nombre_eq from equipo where idequipo = " . $id_equipo_consulta;
             foreach ($db->query($consulta) as $fila) {
                 $nombre = $fila['nombre_eq'];
@@ -40,6 +43,7 @@ if (!isset($_SESSION["conectado"])) {
         $consulta_equipos = "SELECT idequipo, nombre_eq,deporte_iddeporte from equipo;";
         foreach ($db->query($consulta_equipos) as $fila) {
             if ($fila{'deporte_iddeporte'} == $_SESSION['deporte']) {
+                //Muestra una lista con los equipos dependiendo del deporte
                 $idequipo = $fila['idequipo'];
                 $nombre_eq = $fila['nombre_eq'];
                 $lista .= "<li value=\"" . $idequipo . "\"><a href=?equipo=" . $idequipo . ">" . $nombre_eq . "</a></li>";
@@ -48,10 +52,12 @@ if (!isset($_SESSION["conectado"])) {
 
 //--------------------------------------------------------------------------
         if (isset($_GET['equipo'])) {
+            //Se guarda en session el equipo
             $_SESSION['equipo_select'] = $_GET['equipo'];
         }
         if (isset($_SESSION['equipo_select'])) {
             $temporada = "";
+            //muestra la temporada del equipo seleccionado
             $consulta_jugadores = "SELECT idtemporada_temeq,ano_principio,ano_fin from temporada_equipo,temporada where idtemporada=idtemporada_temeq AND  idequipo_temeq=" . @$_SESSION['equipo_select'];
             foreach ($db->query($consulta_jugadores) as $fila) {
                 $idtemporada_temeq = $fila['idtemporada_temeq'];
@@ -61,6 +67,7 @@ if (!isset($_SESSION["conectado"])) {
             }
         }
         if (isset($_GET['temporada_select'])) {
+            //Si no ha seleccionado una temporada sale los datos vacios
             $_SESSION['temporada_select'] = $_GET['temporada_select'];
             $jugadores = "";
             $equipo = (int)$_SESSION['equipo_select'];
@@ -77,6 +84,7 @@ if (!isset($_SESSION["conectado"])) {
                 $idestadio_nombre = "";
                 $identrenador_nombre = "";
             } else {
+                //Cuadno seleccina la temprad y equipo se muestra todos los datos ademas los  partidos que ha disputado
                 $consulta_infoEquipo = "SELECT * from equipo,temporada_equipo,division,estadio,entrenadores, pais where idestadio_temeq = idestadio AND identrenador_temeq = identrenador AND idequipo = ".$equipo." AND idpais=idpais_div and iddivision_temeq = ".$temporada_select."  AND  idequipo=" . $equipo;
                 foreach ($db->query($consulta_infoEquipo) as $fila) {
                     $nombre_eq_l = $fila['nombre_eq'];

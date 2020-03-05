@@ -1,12 +1,11 @@
 <?php
-// If you are using session_name("something"), don't forget it now!
 session_start();
 
-// Unset all of the session variables.
+// Desarma todas las variables de sesión.
 $_SESSION = array();
 
-// If it's desired to kill the session, also delete the session cookie.
-// Note: This will destroy the session, and not just the session data!
+// Si se desea eliminar la sesión, también elimine la cookie de sesión.
+
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
     setcookie(session_name(), '', time() - 42000,
@@ -15,6 +14,7 @@ if (ini_get("session.use_cookies")) {
     );
 }
 
-// Finally, destroy the session.
+// Finalmente, destruye la sesión.
+
 session_destroy();
 header("Location: index.php");

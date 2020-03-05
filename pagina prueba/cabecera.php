@@ -2,7 +2,7 @@
 
 include 'conexionusuarios.php';
 $menu = "";
-//Si no tiene la seseion iniciada solo escribe los botones de login y regitro
+//Si no tiene la session iniciada solo escribe los botones de login y regitro
 if (!isset($_SESSION["conectado"])) {
     $login_logout = '<li><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModallogin">Login</button></li>
                     <li> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalregistro">Registro</button></li>';

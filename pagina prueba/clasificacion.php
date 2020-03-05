@@ -12,9 +12,12 @@
     ?>
     <script type="text/javascript">
         $(function() {
-
+//Usa la libreria tablesorter para ordenar la tabla
             $("table").tablesorter({
+                //El primer numero indica la columna que se quiera ordenar y el segundo numero el orden
+
              sortList: [[2,1], [4,1]],
+                //Estilos de la tabla
                 theme : "bootstrap",
 
                 widthFixed: true,
@@ -54,13 +57,14 @@ if (!isset($_SESSION["conectado"])) {
     header("location:index.php");
 } else {
     include 'cabecera.php';
+    //Si no ha seleccionado ningun deporte le pedimos al usuario que seleccione un deporte
     if (!isset($_SESSION['deporte'])) {
         echo "<p style='color: red'>Selecciona un deporte</p>";
     } else {
         include 'conexionproyecto.php';
         $lista = "";
         if (@$_SESSION['deporte'] != null) {
-
+    //Muestra los equipos del deporte que selecciona el usuario
             $consulta_equipos = "SELECT idequipo, nombre_eq from equipo where deporte_iddeporte =" . $_SESSION['deporte'] . " ;";
             $n = 1;
             function consultarDeporte($db, $id_equipo)
@@ -74,6 +78,7 @@ if (!isset($_SESSION["conectado"])) {
 
             function calcular_puntos($db, $idequipo)
             {
+                //Calcula los puntos de todos los equipos
                 $contador = 0;
                 $goles_favor = 0;
                 $goles_contra = 0;
@@ -103,7 +108,7 @@ if (!isset($_SESSION["conectado"])) {
                         $goles_contra += $goleslocal_cal;
 
                     }
-
+//Añade los puntos correspondientes segun si gana empata o pierde y le añade el icono correspondientes
                     if ($local_cal == $idequipo && $goleslocal_cal > $golesvisitante_cal || $visitante_cal == $idequipo && $golesvisitante_cal > $goleslocal_cal) {
                         $puntos += 3;
                         if ($contador < 5) {
@@ -128,9 +133,12 @@ if (!isset($_SESSION["conectado"])) {
 
                 }
                 if ($jugados == 0) {
+                    //Si un equip no ha jugado ningun partidp devuelve 0 puntos y todo lo demas vario
+
                     return "<td>0</td><td></td><td></td></td><td></td><td></td><td></td><td></td><td></td><td></td>";
 
                 }
+                //Devuelve los datos de los equipos
                 return "<td>$puntos</td><td>$jugados</td><td>$ganados</td><td>$empates</td><td>$perdidos</td><td>" . @$goles_favor . "</td><td>" . @$goles_contra . "</td><td>" . (int)(@$goles_favor - @$goles_contra) . "</td><td>" . $partidos . "</td>";
 
             }

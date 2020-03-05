@@ -2,6 +2,7 @@
     include 'conexionusuarios.php';
     $msg = "";
     if (isset($_POST['enviar_registro'])) {
+        //Se recoge los datos que introduce el usuario se guarda en una variable para que no se pueda usar la insercion sql
         $usuario_registro = trim($_POST['usuario_registro']);
         $nombre_registro = trim($_POST['nombre_registro']);
         $apellidos_registro = trim($_POST['apellidos_registro']);
@@ -32,7 +33,7 @@
             $balonmano_select = 1;
         }
 
-
+//Se comprueba que la costraseña sea algo segura y iguales
         if (strlen($contrasena_registro) < 6) {
             $msg = "La costraseña tiene que tener minimo 6 carapteres";
         } else if ($contrasena_registro != $contrasena_registro2) {
@@ -40,6 +41,7 @@
         } else {
             $hora = date("Y-m-d H:i:s");
             $contraseña = password_hash($contrasena_registro, PASSWORD_DEFAULT);
+            //Se encripta la contraseña
             $sql_contrasena = $db2->prepare("INSERT INTO contrasenas(contrasena,fecha_modificacion) VALUES (:contrasena_registro,' $hora ');");
             $sql_contrasena->bindParam('contrasena_registro', $contraseña, PDO::PARAM_STR);
             $sql_contrasena->execute();
@@ -48,6 +50,7 @@
             foreach ($db2->query($consulta_contraseña) as $fila) {
                 $idcontra = $fila['id_contrasena'];
             }
+            //Se introduce los datos seguros en la base de datos
             $sql_usuario = $db2->prepare("INSERT INTO usuarios(usuario,nombre_usu,apellido_usu,fecha_nac_usu, n_telefono_usu, email,id_contrasena_usu) VALUES (:usuario_registro,:nombre_registro,:apellidos_registro, :fecha_nac , :numero_telf , :correo_registro,  $idcontra);");
             $sql_usuario->bindParam('usuario_registro', $usuario_registro, PDO::PARAM_STR);
             $sql_usuario->bindParam('nombre_registro', $nombre_registro, PDO::PARAM_STR);
@@ -64,7 +67,7 @@
             $count = $stmt->rowCount();
             $row   = $stmt->fetch(PDO::FETCH_ASSOC);
             $usuario = $row['id_usuario'];
-
+//Se introduce los campos que ha marcado en la base de datos
             $sql2 = $db2->prepare("INSERT INTO deportes_sel(id_usuario_dep, futbol_dep, baloncesto_dep, futbol_sala, balonmano_dep) VALUES (:usuario,:futbol, :baloncesto, :futbol_sala, :balonmano);");
             $sql2->bindParam('usuario', $usuario, PDO::PARAM_STR);
             $sql2->bindParam('futbol', $futbol_select, PDO::PARAM_STR);
@@ -78,6 +81,7 @@
     function dateformat($fecha)
     {
         $fecha = strtotime($fecha);
+        //Cambia el formato para que se pueda introducir en la base da datos
         return date(date('Y', $fecha) . "-" . date('m', $fecha) . "-" . date('d', $fecha));
     }
 
@@ -139,7 +143,7 @@
 <span class="text-danger"><?php echo @$msg ?></span>
 
 
-
+<!-- Se carga la libreria para saber la seguridad de la contraseña -->
 <script type="text/javascript" src="assets/js/strength.js"></script>
 <script type="text/javascript" src="assets/js/costrasena.js"></script>
 
