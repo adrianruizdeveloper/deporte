@@ -26,8 +26,6 @@ if (!isset($_SESSION["conectado"])) {
     if (!isset($_SESSION['deporte'])) {
         echo "<p style='color: red'>Selecciona un deporte</p>";
     } else {
-        $temporada = "";
-        $idtemporada = 1;
         $lista = "";
         $consulta_equipos = "SELECT idequipo, nombre_eq,deporte_iddeporte from equipo;";
         foreach ($db->query($consulta_equipos) as $fila) {
@@ -40,24 +38,29 @@ if (!isset($_SESSION["conectado"])) {
         }
 
 //_-----------------------------------------------------------------------_\\
-        $consulta_temporada = "select idtemporada,ano_principio,ano_fin from temporada order by  idtemporada desc;";
-        foreach ($db->query($consulta_temporada) as $fila) {
-            $idtemporada = $fila['idtemporada'];
-            $principio = $fila['ano_principio'];
-            $fin = $fila['ano_fin'];
-            $temporada .= "<option value=\"" . $idtemporada . "\">" . $principio . "-" . $fin . "</option>";
-        }
         if (isset($_GET['equipo'])) {
-            setcookie('equipo_seleccionado', $_GET['equipo']);
+            $_SESSION['equipo_select']=$_GET['equipo'];
         }
 
         if (isset($_GET['temporada_select'])) {
-            setcookie('temporada_seleccionado', $_GET['temporada_select']);
+            $_SESSION['temporada_select']=$_GET['temporada_select'];
+        }
+        if (isset($_SESSION['equipo_select'])) {
+            $temporadas = "";
+            $consulta_temporada = "select idtemporada,ano_principio,ano_fin from temporada, temporada_equipo where idequipo_temeq = " . $_SESSION['equipo_select'] . " and idtemporada_temeq = idtemporada order by  idtemporada desc;";
+            foreach ($db->query($consulta_temporada) as $fila) {
+                $idtemporada = $fila['idtemporada'];
+                $principio = $fila['ano_principio'];
+                $fin = $fila['ano_fin'];
+                $temporadas .= "<option value=\"" . $idtemporada . "\">" . $principio . "-" . $fin . "</option>";
+            }
         }
 
-        if (isset($_COOKIE['equipo_seleccionado']) && isset($_COOKIE['temporada_seleccionado'])) {
+        if (isset($_SESSION['equipo_select']) && isset($_SESSION['temporada_select'])) {
+            $equipo = $_SESSION['equipo_select'];
+            $temporada = $_SESSION['temporada_select'];
             $jugadores = "";
-            $consulta_jugadores = "SELECT idjugador, alias_jug from jugador,jugador_equipo_temporada  where idequipo_jet=" . @$_COOKIE['equipo_seleccionado'] . " and Jugador_idjugador=idjugador and temporada_idtemporada = " . @$_COOKIE['temporada_seleccionado'];
+            $consulta_jugadores = "SELECT idjugador, alias_jug from jugador,jugador_equipo_temporada  where idequipo_jet= " . @$equipo . " and jugador_idjugador=idjugador and temporada_idtemporada = " . @$temporada;
             foreach ($db->query($consulta_jugadores) as $fila) {
                 $idjugador = $fila['idjugador'];
                 $alias_jug = $fila['alias_jug'];
@@ -70,9 +73,9 @@ if (!isset($_SESSION["conectado"])) {
             $info_jug = "";
             $id_jug = (int)$_GET['jugador_select'];
             $consulta = "SELECT nombre_jug, apellido_jug, alias_jug, fechanac_jug, nacionalidad_jug, numero_jug_jet, nombre_eq, nombre_pos, nombre_div 
-    from jugador , jugador_equipo_temporada, equipo, posicion, temporada_equipo, division
-    where Jugador_idjugador=" . $id_jug . " and idjugador = " . $id_jug . " and idequipo_jet= idequipo
-    and idposicion_jet = idposicion and idequipo_temeq = idequipo and iddivision_temeq = iddivision ";
+              from jugador , jugador_equipo_temporada, equipo, posicion, temporada_equipo, division
+             where Jugador_idjugador=" . $id_jug . " and idjugador = " . $id_jug . " and idequipo_jet= idequipo
+              and idposicion_jet = idposicion and idequipo_temeq = idequipo and iddivision_temeq = iddivision ";
             foreach ($db->query($consulta) as $fila) {
                 $nombre_jug = $fila['nombre_jug'];
                 $apellido_jug = $fila['apellido_jug'];
@@ -87,8 +90,8 @@ if (!isset($_SESSION["conectado"])) {
             }
 
         }
-        if (isset($_COOKIE['temporada_seleccionado'])) {
-            $temporada1 = "select ano_principio,ano_fin from temporada where idtemporada = " . @$_COOKIE['temporada_seleccionado'];
+        if (isset($_SESSION['temporada_select'])) {
+            $temporada1 = "select ano_principio,ano_fin from temporada where idtemporada = " . @$_SESSION['temporada_select'];
             $temporada2 = "";
             foreach ($db->query($temporada1) as $fila) {
                 $ano_principio = $fila['ano_principio'];
@@ -108,6 +111,14 @@ if (!isset($_SESSION["conectado"])) {
                     </div>
                     <div class="col-md-8">
                         <form>
+                            <select name="temporada_select" id="temporada_select">
+                                <option value="0" selected>Seleccione una temporada</option>
+                                <?php echo $temporadas ?>
+                                </optgroup>
+                            </select>
+                            <button type="submit">Seleccionar Temporada</button>
+                        </form>
+                        <form>
                             <select name="jugador_select" id="jugador_select">
                                 <optgroup label="Recuerde seleccionar un equipo">
                                     <option value="0" selected="">Seleccione un jugador</option>
@@ -116,14 +127,7 @@ if (!isset($_SESSION["conectado"])) {
                             </select>
                             <button type="submit">Seleccionar Jugador</button>
                         </form>
-                        <form>
-                            <select name="temporada_select" id="temporada_select">
-                                <option value="0" selected="">Seleccione una temporada</option>
-                                <?php echo $temporada ?>
-                                </optgroup>
-                            </select>
-                            <button type="submit">Seleccionar Temporada</button>
-                        </form>
+
                         <p>Temporada seleccionada:<b> <?php echo @$temporada2; ?></b></p>
 
                         <div class="table-responsive">
