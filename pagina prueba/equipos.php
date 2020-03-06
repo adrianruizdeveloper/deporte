@@ -67,7 +67,7 @@ if (!isset($_SESSION["conectado"])) {
             }
         }
         if (isset($_GET['temporada_select'])) {
-            //Si no ha seleccionado una temporada sale los datos vacios
+            //Si se ha seleccionado una temporada, pero no un equippo salen los datos vacios
             $_SESSION['temporada_select'] = $_GET['temporada_select'];
             $jugadores = "";
             $equipo = (int)$_SESSION['equipo_select'];
@@ -84,7 +84,7 @@ if (!isset($_SESSION["conectado"])) {
                 $idestadio_nombre = "";
                 $identrenador_nombre = "";
             } else {
-                //Cuadno seleccina la temprad y equipo se muestra todos los datos ademas los  partidos que ha disputado
+                //Cuando selecciona la temporada y el equipo se muestra todos los datos, además de los  partidos que ha disputado
                 $consulta_infoEquipo = "SELECT * from equipo,temporada_equipo,division,estadio,entrenadores, pais where idestadio_temeq = idestadio AND identrenador_temeq = identrenador AND idequipo = ".$equipo." AND idpais=idpais_div and iddivision_temeq = ".$temporada_select."  AND  idequipo=" . $equipo;
                 foreach ($db->query($consulta_infoEquipo) as $fila) {
                     $nombre_eq_l = $fila['nombre_eq'];
