@@ -111,10 +111,11 @@ if (!isset($_SESSION["conectado"])) {
 //Añade los puntos correspondientes segun si gana empata o pierde y le añade el icono correspondientes
                     if ($local_cal == $idequipo && $goleslocal_cal > $golesvisitante_cal || $visitante_cal == $idequipo && $golesvisitante_cal > $goleslocal_cal) {
                         $puntos += 3;
+                        $ganados += 1;
                         if ($contador < 5) {
                             $partidos .= "<i style=\"font-size:24px; color:green\"  class=\"fa\">&#xf058;</i>";
                             $contador += 1;
-                            $ganados += 1;
+
                         }
                     } else if ($goleslocal_cal == $golesvisitante_cal) {
                         $puntos += 1;
@@ -133,7 +134,7 @@ if (!isset($_SESSION["conectado"])) {
 
                 }
                 if ($jugados == 0) {
-                    //Si un equip no ha jugado ningun partidp devuelve 0 puntos y todo lo demas vario
+                    //Si un equipo no ha jugado ningun partido devuelve 0 puntos y todo lo demas vacio
 
                     return "<td>0</td><td></td><td></td></td><td></td><td></td><td></td><td></td><td></td><td></td>";
 
