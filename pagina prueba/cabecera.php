@@ -40,43 +40,35 @@ if (!isset($_SESSION["conectado"])) {
             $menu .= '<li class="nav-item"><a class="nav-link" href="#" onclick="seleccionar_deporte(4)">BALONMANO</a></li>';
         }
     }
-
-}
-
-?>
-<div>
-    <div>
-
-        <div class="row">
-            <div class="col-md-8">
-                <div class="div_logo"><img id="logo" class="img-fluid" src="assets/img/logo.jpg"></div>
-                <p id="titulo_pagina">Proyecto</p>
-            </div>
-            <div class="col-md-4">
-                <ul id="botones_login">
-                    <?php echo $login_logout ?>
-                </ul>
-            </div>
-        </div>
-        <ul class="nav nav-tabs" id="menu1">
-            <?php echo $menu ?>
+} ?>
+<div class="row">
+    <div class="col-md-2 offset-1"><img id="logo" class="img-fluid" src="assets/img/logo.jpg"></div>
+    <div class="col-md-5">
+        <p id="titulo_pagina">Proyecto</p>
+    </div>
+    <div class="col-md-4">
+        <ul id="botones_login">
+            <?php echo $login_logout ?>
         </ul>
-        <?php
-        if (!isset($_SESSION["conectado"])) {
-            // si el usuario no esta conectado no se muetra los botones de equips ,calendarios, etc
-            //Cuando inicia sesion si se muestras
-        } else { ?>
-
-        <ul class="nav nav-tabs" id="menu2">
-            <li class="nav-item"><a class="nav-link" href="equipos.php">Equipos</a></li>
-            <li class="nav-item"><a class="nav-link" href="calendario.php">Calendario</a></li>
-            <li class="nav-item"><a class="nav-link" href="estadisticas.php">Estadística</a></li>
-            <li class="nav-item"><a class="nav-link" href="clasificacion.php">Clasificación</a></li>
-            <li class="nav-item"><a class="nav-link" href="jugadores.php">Jugadores</a></li>
-        </ul>
-        <?php } ?>
     </div>
 </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <?php
+    echo $menu;
+    if (!isset($_SESSION["conectado"])) {
+        // si el usuario no esta conectado no se muetra los botones de equips ,calendarios, etc
+        //Cuando inicia sesion si se muestras
+    } else { ?>
+    <li><div class="align-middle" style="width:1px;height:20px;border-right:2px solid black;"></div></li>
+
+        <li class="nav-item"><a class="nav-link" href="equipos.php">Equipos</a></li>
+    <li class="nav-item"><a class="nav-link" href="calendario.php">Calendario</a></li>
+    <li class="nav-item"><a class="nav-link" href="estadisticas.php">Estadística</a></li>
+    <li class="nav-item"><a class="nav-link" href="clasificacion.php">Clasificación</a></li>
+    <li class="nav-item"><a class="nav-link" href="jugadores.php">Jugadores</a></li>
+
+<?php } ?>
+</nav>
 
 <!-- Ventana modal de login y registro -->
 <div class="modal" id="myModallogin" data-backdrop="static">
@@ -118,9 +110,6 @@ if (!isset($_SESSION["conectado"])) {
             <!-- Modal body -->
             <div class="modal-body">
                 <?php include 'registro.php'; ?>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
 
         </div>
