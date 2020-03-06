@@ -16,7 +16,7 @@
             $("table").tablesorter({
                 //El primer numero indica la columna que se quiera ordenar y el segundo numero el orden
 
-             sortList: [[2,1], [4,1]],
+             sortList: [[2,1], [4,1],[9,1]],
                 //Estilos de la tabla
                 theme : "bootstrap",
 
