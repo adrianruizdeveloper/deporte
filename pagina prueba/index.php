@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Principal</title>
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+
 
     <?php include 'links.php';
     //Carga los links propios del index
@@ -19,10 +19,10 @@
     session_start();
     include 'cabecera.php'; ?>
     <div>
-        <div class="container">
+        <div class="container bg-gradient-light text-dark">
             <div class="row">
                 <div class="col-md-3">
-                    <p><img id="imagenesindex" src="assets/img/multisdeportes.jpg" ></p>
+                    <p><img class="img-fluid" id="imagenesindex" src="assets/img/multisdeportes.jpg" ></p>
                 </div>
                 <div class="col-md-9">
                     <h1>Pagina WEB con las estadisticas de varios deportes y sus respetivos equipos</h1>

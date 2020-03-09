@@ -41,8 +41,8 @@ if (!isset($_SESSION["conectado"])) {
         }
     }
 } ?>
-<div class="row">
-    <div class="col-md-2 offset-1"><img id="logo" class="img-fluid" src="assets/img/logo.jpg"></div>
+<div class="row cabecera">
+    <div class="col-md-2 offset-1 div_logo"><img id="logo" class="img-fluid" src="assets/img/logo.jpg"></div>
     <div class="col-md-5">
         <p id="titulo_pagina">Complejo Deportivo Ciudad de Jaén</p>
     </div>
@@ -52,7 +52,7 @@ if (!isset($_SESSION["conectado"])) {
         </ul>
     </div>
 </div>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light menu1">
     <?php
     echo $menu;
     if (!isset($_SESSION["conectado"])) {
