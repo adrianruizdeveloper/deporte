@@ -23,7 +23,8 @@
 
                     </div>
                 </div>
-                <p class="copyright">Company of Pisé © 2020</p>
+                <p id="piebajo" class="copyright">Company of Pisé © 2020</p>
             </div>
+
         </footer>
     </div>
