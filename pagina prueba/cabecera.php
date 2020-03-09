@@ -21,7 +21,7 @@ if (!isset($_SESSION["conectado"])) {
         foreach ($db2->query($consulta_menu1) as $fila) {
             $futbol = $fila['futbol_dep'];
             $baloncesto = $fila['baloncesto_dep'];
-            $futbol_sala = $fila['futbol_dep'];
+            $futbol_sala = $fila['futbol_sala'];
             $balonmano = $fila['balonmano_dep'];
 //Segun lo que  tenga marcado el usuarios al registro de los deportes que quiere se muestra los que ha elegido
 
