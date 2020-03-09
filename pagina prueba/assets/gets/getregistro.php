@@ -10,33 +10,13 @@ $contrasena_registro = trim($_POST['contrasena_registro']);
 $contrasena_registro2 = trim($_POST['contrasena_registro2']);
 $fecha_nac = $_POST['fecha_nac_registro'];
 $fecha_nac = dateformat($fecha_nac);
-$numero_telf = trim($_POST['num_telef_registro']);
+$numero_telf = trim($_POST['num_telf_registro']);
 $futbol_select = trim($_POST['futbol_registro']);
+
 $futbol_sala_select = trim($_POST['futbol_sala_registro']);
 $baloncesto_select = trim($_POST['baloncesto_registro']);
 $balonmano_select = trim($_POST['balonmano_registro']);
-/*
-if (!isset($_POST['futbol_registro'])) {
-    $futbol_select = 0;
-} else {
-    $futbol_select = 1;
-}
-if (!isset($_POST['futbol_sala_registro'])) {
-    $futbol_sala_select = 0;
-} else {
-    $futbol_sala_select = 1;
-}
-if (!isset($_POST['baloncesto_registro'])) {
-    $baloncesto_select = 0;
-} else {
-    $baloncesto_select = 1;
-}
-if (!isset($_POST['balonmano_registro'])) {
-    $balonmano_select = 0;
-} else {
-    $balonmano_select = 1;
-}*/
-
+echo "<script>alert(\"hols\");</script>";
 //Se comprueba que la costraseña sea algo segura y iguales
 if (strlen($contrasena_registro) < 6) {
     echo ("La costraseña tiene que tener minimo 6 carapteres");
@@ -76,7 +56,7 @@ if (strlen($contrasena_registro) < 6) {
     $sql2->bindParam('usuario', $usuario, PDO::PARAM_STR);
     $sql2->bindParam('futbol', $futbol_select, PDO::PARAM_STR);
     $sql2->bindParam('baloncesto', $baloncesto_select, PDO::PARAM_STR);
-    $sql2->bindParam('futbol_sala', $futbol_select, PDO::PARAM_STR);
+    $sql2->bindParam('futbol_sala', $futbol_sala_select, PDO::PARAM_STR);
     $sql2->bindParam('balonmano', $balonmano_select, PDO::PARAM_STR);
     $sql2->execute();
     echo ("OK");
