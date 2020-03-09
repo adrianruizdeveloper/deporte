@@ -17,11 +17,27 @@ header {
 #logo {
     height: 100px;
     width: 120px;
-    margin-bot:20px;
     padding: 0px;
     
 }
 
 .div_logo{
     paddig:0px;
+    margin: 0px;
+}
+
+.cabecera{
+    border-radius: 60px 60px 60px 60px;
+    -moz-border-radius: 60px 60px 60px 60px;
+    -webkit-border-radius: 60px 60px 60px 60px;
+    border: 4px solid #9ccfae;
+    background-color: #c5ffd4;
+    margin-bottom: 2px;
+}
+.menu1{
+    border-radius: 49px 49px 49px 49px;
+    -moz-border-radius: 49px 49px 49px 49px;
+    -webkit-border-radius: 49px 49px 49px 49px;
+    border: 2px solid #8196ff;
+    background-color: #ffc3eb;
 }
