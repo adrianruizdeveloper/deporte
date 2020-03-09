@@ -9,9 +9,21 @@ $('#enviar_registro').click(function () {
     var contrasena_registro = $('#myPassword').val();
     var contrasena_registro2 = $('#contrasena_registro2').val();
     var futbol_registro = $('#futbol_registro').val();
-    var futbol_sala_registro = $('#futbol_sala_registro').val();
+    if( $('#futbol_registro').prop('checked') ) {
+        futbol_registro = 1;
+    }
+    var futbol_sala_registro =  $('#futbol_sala_registro').val();
+    if( $('#futbol_sala_registro').prop('checked') ) {
+        futbol_sala_registro= 1;
+    }
     var baloncesto_registro = $('#baloncesto_registro').val();
+    if( $('#baloncesto_registro').prop('checked') ) {
+        baloncesto_registro = 1;
+    }
     var balonmano_registro = $('#balonmano_registro').val();
+    if( $('#balonmano_registro').prop('checked') ) {
+        balonmano_registro = 1;
+    }
     $.ajax({
         url: "assets/gets/getregistro.php",
         type: "POST",
@@ -23,6 +35,7 @@ $('#enviar_registro').click(function () {
         baloncesto_registro: baloncesto_registro, balonmano_registro: balonmano_registro},
         success: function (data){
             alert(data);
+
             if (data == 'OK') {
                 $('#myModalregistro').hide();
                 //location.reload();
