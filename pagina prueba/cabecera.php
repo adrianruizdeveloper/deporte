@@ -44,7 +44,7 @@ if (!isset($_SESSION["conectado"])) {
 <div class="row">
     <div class="col-md-2 offset-1"><img id="logo" class="img-fluid" src="assets/img/logo.jpg"></div>
     <div class="col-md-5">
-        <p id="titulo_pagina">Proyecto</p>
+        <p id="titulo_pagina">Complejo Deportivo Ciudad de Jaén</p>
     </div>
     <div class="col-md-4">
         <ul id="botones_login">
